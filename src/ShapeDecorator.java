@@ -1,8 +1,9 @@
-import java.awt.Graphics;
+import java.awt.*;
 
-public class ShapeDecorator implements Shape
+public abstract class ShapeDecorator implements Shape
   {
-  private Shape decoratee;
+  private final Shape decoratee;
+  
   public ShapeDecorator(Shape decoratee)
     {
     this.decoratee = decoratee;
@@ -11,10 +12,8 @@ public class ShapeDecorator implements Shape
   public void draw(Graphics g)
     {
     decoratee.draw(g);
-    Point position = decoratee.getPosition();
-    int x = (int)(position.getX()-decoratee.getWidth()/2.0+0.5);
-    int y = (int)(position.getY()-decoratee.getHeight()/2.0+0.5);
-    g.fillOval(x,y,(int)(decoratee.getWidth()+0.5),(int)(decoratee.getHeight()+0.5));
+    g.setColor(Color.RED);
+
     }
   @Override
   public Point getPosition()
@@ -56,4 +55,16 @@ public class ShapeDecorator implements Shape
     {
     return decoratee;
     }
+
+    @Override
+    public void setMarked(boolean marked) {
+      this.decoratee.setMarked(marked);
+    }
+
+    @Override
+    public boolean isMarked() {
+      return decoratee.isMarked();
+    }
+
+
   }
