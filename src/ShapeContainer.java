@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 public class ShapeContainer extends JPanel implements Pointable
   {
   private static final long serialVersionUID = 1L;
-  private List<Shape>       shapes           = new LinkedList<Shape>();
+  private List<Shape>       shapes           = new LinkedList<>();
 
   public enum Mode
     {
