@@ -1,3 +1,5 @@
+import States.*;
+
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
@@ -16,17 +18,18 @@ public class ShapeApp extends JFrame
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setSize(400,400);
     this.setVisible(true);
+    State.reset(this);
     }
   
   public void createMenue()
     {
     JMenu menu = new JMenu("Modes");
-    createMenuItem(menu, "Insert", e -> shapeContainer.setMode(ShapeContainer.Mode.INSERT));
-    createMenuItem(menu, "Move", e -> shapeContainer.setMode(ShapeContainer.Mode.MOVE));
-    createMenuItem(menu, "Delete", e -> shapeContainer.setMode(ShapeContainer.Mode.DELETE));
-    createMenuItem(menu, "Mark", e -> shapeContainer.setMode(ShapeContainer.Mode.MARK));
-    createMenuItem(menu, "Unmark", e -> shapeContainer.setMode(ShapeContainer.Mode.UNMARK));
-    createMenuItem(menu, "Resize", e -> shapeContainer.setMode(ShapeContainer.Mode.RESIZE));
+    createMenuItem(menu, "Insert", e -> State.setState(new StateInsert(this)));
+    createMenuItem(menu, "Move", e -> State.setState(new StateMove(this)));
+    createMenuItem(menu, "Delete", e -> State.setState(new StateDelete(this)));
+    createMenuItem(menu, "Mark", e -> State.setState(new StateMark(this)));
+    createMenuItem(menu, "Unmark", e -> State.setState(new StateUnmark(this)));
+    createMenuItem(menu, "Resize", e -> State.setState(new StateResize(this)));
     JMenuBar menuBar = new JMenuBar();
     menuBar.add(menu);
     this.setJMenuBar(menuBar);

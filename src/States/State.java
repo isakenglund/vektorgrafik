@@ -1,20 +1,25 @@
 package States;
 
+import javax.swing.*;
 import java.awt.*;
 
 public abstract class State {
+    private static State currentState;
 
-    private static State state;
-
-    public static State getState(){
-        return this.state;
-    }
-    protected static void setSate(State state){
-        this.state = state;
+    public State getState(){
+        return this;
     }
 
-    public static void reset(ShapeApp app){
-        setSate(new StateInsert(app));
+    public static void setState(State state){
+        currentState = state;
+    }
+
+    public static void reset(JFrame app){
+        setState(new StateInsert(app));
+    }
+
+    public static State getCurrentState(){
+        return currentState;
     }
 
     abstract void handleClick(Point point);

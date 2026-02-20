@@ -3,9 +3,9 @@ package States;
 import javax.swing.*;
 import java.awt.*;
 
-public class StateInsert extends State {
+public class StateMove extends State {
 
-    public StateInsert(JFrame app){
+    public StateMove(JFrame app) {
 
     }
 
