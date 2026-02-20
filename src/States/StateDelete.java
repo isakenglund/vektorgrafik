@@ -1,21 +1,22 @@
 package States;
 
-import javax.swing.*;
-import java.awt.*;
+import Main.ShapeApp;
+import Shapes.Point;
 
 public class StateDelete extends State{
 
-    public StateDelete(JFrame app){
-
+    public StateDelete(ShapeApp app){
+        super(app);
     }
 
     @Override
-    void handleClick(Point point) {
-
+    public void pointerDown(Point point) {
+        Shapes.Shape selected = app.getShapeContainer().getSelected();
+        app.getShapeContainer().select(point);
+        if (selected != null)
+            app.getShapeContainer().removeShape(selected);
+        app.getShapeContainer().setSelected(null);
+        app.getShapeContainer().repaint(); // uppmanar swing att måla om
     }
 
-    @Override
-    void handleHold(Point point, boolean pointerDown) {
-
-    }
 }

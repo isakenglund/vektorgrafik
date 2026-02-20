@@ -1,3 +1,5 @@
+package Shapes;
+
 import java.awt.Graphics;
 
 public interface Shape

@@ -1,10 +1,17 @@
 package States;
 
-import javax.swing.*;
-import java.awt.*;
+import Main.Pointable;
+import Main.ShapeApp;
+import Shapes.Point;
 
-public abstract class State {
+public abstract class State implements Pointable {
     private static State currentState;
+
+    ShapeApp app;
+
+    public State(ShapeApp app){
+        this.app = app;
+    }
 
     public State getState(){
         return this;
@@ -14,7 +21,7 @@ public abstract class State {
         currentState = state;
     }
 
-    public static void reset(JFrame app){
+    public static void reset(ShapeApp app){
         setState(new StateInsert(app));
     }
 
@@ -22,6 +29,19 @@ public abstract class State {
         return currentState;
     }
 
-    abstract void handleClick(Point point);
-    abstract void handleHold(Point point, boolean pointerDown);
+    @Override
+    public void pointerDown(Point point) {
+
+    }
+
+    @Override
+    public void pointerUp(Point point) {
+        app.getShapeContainer().setSelected(null);
+    }
+
+    @Override
+    public void pointerMoved(Point point, boolean pointerDown) {
+
+    }
+
 }

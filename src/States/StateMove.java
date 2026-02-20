@@ -1,21 +1,25 @@
 package States;
 
-import javax.swing.*;
-import java.awt.*;
+import Main.ShapeApp;
+import Shapes.Point;
 
 public class StateMove extends State {
-
-    public StateMove(JFrame app) {
-
+    public StateMove(ShapeApp app){
+        super(app);
     }
 
     @Override
-    void handleClick(Point point) {
-
+    public void pointerDown(Point point) {
+        app.getShapeContainer().select(point);
     }
 
-    @Override
-    void handleHold(Point point, boolean pointerDown) {
 
+
+    @Override
+    public void pointerMoved(Point point, boolean pointerDown) {
+        if(app.getShapeContainer().getSelected() != null && pointerDown) {
+            app.getShapeContainer().getSelected().moveTo(point);
+            app.getShapeContainer().repaint();
+        }
     }
 }

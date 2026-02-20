@@ -1,3 +1,5 @@
+package Shapes;
+
 import java.awt.Graphics;
 
 public class Circle implements Shape

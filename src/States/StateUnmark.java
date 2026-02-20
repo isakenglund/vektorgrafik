@@ -1,21 +1,27 @@
 package States;
 
-import javax.swing.*;
-import java.awt.*;
+import Main.ShapeApp;
+import Main.ShapeContainer;
+import Shapes.Point;
+import Shapes.Shape;
 
 public class StateUnmark extends State {
-
-    public StateUnmark(JFrame app){
-
+    public StateUnmark(ShapeApp app){
+        super(app);
     }
 
     @Override
-    void handleClick(Point point) {
+    public void pointerDown(Point point) {
+        app.getShapeContainer().select(point);
+        Shape selected = app.getShapeContainer().getSelected();
+        ShapeContainer shapeContainer = app.getShapeContainer();
 
-    }
-
-    @Override
-    void handleHold(Point point, boolean pointerDown) {
-
+        if(selected != null)
+        {
+            Shape unmarkedShape = selected.peel();
+            shapeContainer.removeShape(selected);
+            shapeContainer.addShape(unmarkedShape);
+            app.getShapeContainer().repaint();
+        }
     }
 }

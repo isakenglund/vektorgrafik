@@ -1,3 +1,5 @@
+package Main;
+
 import States.*;
 
 import java.awt.event.ActionListener;
@@ -40,6 +42,10 @@ public class ShapeApp extends JFrame
     JMenuItem menuItem = new JMenuItem(label);
     menuItem.addActionListener(listener);
     menu.add(menuItem);
+    }
+
+    public ShapeContainer getShapeContainer() {
+    return shapeContainer;
     }
   
   public static void main(String args[])

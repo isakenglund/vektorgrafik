@@ -1,21 +1,28 @@
 package States;
 
+import Main.ShapeApp;
+import Shapes.Point;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class StateResize extends State{
-
-    public StateResize(JFrame app){
-
+    public StateResize(ShapeApp app){
+        super(app);
     }
 
     @Override
-    void handleClick(Point point) {
-
+    public void pointerDown(Point point) {
+        app.getShapeContainer().select(point);
     }
 
-    @Override
-    void handleHold(Point point, boolean pointerDown) {
 
+
+    @Override
+    public void pointerMoved(Point point, boolean pointerDown) {
+        if(app.getShapeContainer().getSelected() != null && pointerDown) {
+            app.getShapeContainer().getSelected().resizeTo(point);
+            app.getShapeContainer().repaint();
+        }
     }
 }
