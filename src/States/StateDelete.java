@@ -11,8 +11,8 @@ public class StateDelete extends State{
 
     @Override
     public void pointerDown(Point point) {
-        Shapes.Shape selected = app.getShapeContainer().getSelected();
         app.getShapeContainer().select(point);
+        Shapes.Shape selected = app.getShapeContainer().getSelected();
         if (selected != null)
             app.getShapeContainer().removeShape(selected);
         app.getShapeContainer().setSelected(null);
