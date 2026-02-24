@@ -32,8 +32,13 @@ public class ShapeApp extends JFrame
     createMenuItem(menu, "Mark", e -> State.setState(new StateMark(this)));
     createMenuItem(menu, "Unmark", e -> State.setState(new StateUnmark(this)));
     createMenuItem(menu, "Resize", e -> State.setState(new StateResize(this)));
+    createMenuItem(menu, "Merge", e -> State.setState(new StateMerge(this)));
+    JMenu menuShape = new JMenu("Shapes");
+      createMenuItem(menuShape, "Circle", e -> State.setState(new StateInsert(this)));
+      createMenuItem(menuShape, "Rectangle", e -> State.setState(new StateMove(this)));
     JMenuBar menuBar = new JMenuBar();
     menuBar.add(menu);
+    menuBar.add(menuShape);
     this.setJMenuBar(menuBar);
     }
   

@@ -59,8 +59,6 @@ public class Rectangle implements Shape {
 
     @Override
     public void resizeTo(Point point) {
-        double distance = center.distanceTo(point);
-
         this.width = Math.abs(point.getX() - center.getX()) * 2.0;
         this.height = Math.abs(point.getY() - center.getY()) * 2.0;
     }
