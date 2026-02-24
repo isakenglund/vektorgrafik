@@ -1,27 +1,32 @@
 package Shapes;
 
-import java.awt.Graphics;
+import java.awt.*;
 
 public class Circle implements Shape
   {
   private Point center;
   private double r;
-  
+  private boolean marked;
+
   public Circle(double x, double y, double r)
     {
     center = new Point(x,y);
     this.r = r;
+      this.marked = false;
+
     }
 
   public Circle(Point point, double r)
     {
     this(point.getX(), point.getY(), r);
+      this.marked = false;
     }
 
   @Override
   public void draw(Graphics g)
     {
-    g.drawOval((int)(0.5+center.getX()-r), (int)(0.5+center.getY()-r), (int)(0.5+2*r), (int)(0.5+2*r));
+      g.setColor(Color.black);
+      g.drawOval((int)(0.5+center.getX()-r), (int)(0.5+center.getY()-r), (int)(0.5+2*r), (int)(0.5+2*r));
     }
 
   @Override
@@ -70,6 +75,16 @@ public class Circle implements Shape
   public Shape peel()
     {
     return this;
+    }
+
+    @Override
+    public void setMarked(boolean marked) {
+      this.marked = marked;
+    }
+
+    @Override
+    public boolean isMarked() {
+      return this.marked;
     }
 
   }

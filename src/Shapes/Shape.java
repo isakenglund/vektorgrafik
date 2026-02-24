@@ -13,4 +13,6 @@ public interface Shape
   public void move(double dx, double dy);
   public void resizeTo(Point point);
   public Shape peel();
+  public void setMarked(boolean marked);
+  public boolean isMarked();
   }
