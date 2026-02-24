@@ -61,18 +61,23 @@ public class CompositeShape implements Shape {
     @Override
     public void moveTo(Point point)
     {
+        double dx = point.getX() - center.getX();
+        double dy = point.getY() - center.getY();
+        for(Shape shape : shapesList) shape.move(dx, dy);
         center.moveTo(point);
     }
 
     @Override
     public void move(double dx, double dy)
     {
+        for(Shape shape : shapesList) shape.move(dx, dy);
         center.move(dx, dy);
     }
 
     @Override
     public void resizeTo(Point point)
     {
+        for(Shape shape : shapesList) shape.resizeTo(point);
         this.width = Math.abs(point.getX() - center.getX()) * 2.0;
         this.height = Math.abs(point.getY() - center.getY()) * 2.0;
     }

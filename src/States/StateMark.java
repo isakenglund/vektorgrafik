@@ -32,5 +32,4 @@ public class StateMark extends State{
             app.getShapeContainer().repaint();
         }
     }
-
 }
