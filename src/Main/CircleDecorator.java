@@ -1,4 +1,9 @@
+package Main;
+
 import java.awt.*;
+
+import Shapes.Point;
+import Shapes.Shape;
 
 public class CircleDecorator extends ShapeDecorator{
 

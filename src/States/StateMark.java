@@ -1,5 +1,6 @@
 package States;
 
+import Main.RectangleDecorator;
 import Main.ShapeApp;
 import Main.ShapeContainer;
 import Main.ShapeDecorator;
@@ -21,9 +22,11 @@ public class StateMark extends State{
         Shape selected = app.getShapeContainer().getSelected();
         ShapeContainer shapeContainer = app.getShapeContainer();
 
-        if(selected != null)
+        if(selected != null && !selected.isMarked())
         {
-            Shape markedShape = new ShapeDecorator(selected);
+            //Shape markedShape = new Main.CircleDecorator(selected);
+            Shape markedShape = new RectangleDecorator(selected);
+            markedShape.setMarked(true);
             shapeContainer.removeShape(selected);
             shapeContainer.addShape(markedShape);
             app.getShapeContainer().repaint();

@@ -1,6 +1,10 @@
-import java.awt.*;
+package Shapes;
 
-public class Rectangle implements Shape{
+import java.awt.*;
+import Shapes.Point;
+import Shapes.Shape;
+
+public class Rectangle implements Shape {
 
     private Point center;
     private double width, height;

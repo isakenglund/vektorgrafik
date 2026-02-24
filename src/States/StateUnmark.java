@@ -16,9 +16,10 @@ public class StateUnmark extends State {
         Shape selected = app.getShapeContainer().getSelected();
         ShapeContainer shapeContainer = app.getShapeContainer();
 
-        if(selected != null)
+        if(selected != null && selected.isMarked())
         {
             Shape unmarkedShape = selected.peel();
+            unmarkedShape.setMarked(false);
             shapeContainer.removeShape(selected);
             shapeContainer.addShape(unmarkedShape);
             app.getShapeContainer().repaint();

@@ -1,3 +1,9 @@
+package Main;
+
+
+import Shapes.Point;
+import Shapes.Shape;
+
 import java.awt.*;
 
 public class RectangleDecorator extends ShapeDecorator{
