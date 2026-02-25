@@ -22,9 +22,4 @@ public class StateResize extends State{
             app.getShapeContainer().repaint();
         }
     }
-
-    @Override
-    public void pointerUp(Point point) {
-        System.out.println(app.getShapeContainer().getShapes().size());
-    }
 }
