@@ -25,18 +25,11 @@ public class StateMerge extends State {
 
     }
 
-    /*
+
     @Override
     public void pointerMoved(Point point, boolean pointerDown) {
-        if(app.getShapeContainer().getSelected() != null && pointerDown) {
-            Shape marker = new Rectangle(point.getX(),point.getY(),50,50);
-            app.getShapeContainer().addShape(marker);
-            app.getShapeContainer().setSelected(marker);
-            marker.resizeTo(point);
-            app.getShapeContainer().repaint();
-        }
+
     }
-     */
 
     @Override
     public void pointerUp(Point point) {

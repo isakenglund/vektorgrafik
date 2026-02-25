@@ -78,10 +78,7 @@ public class ShapeContainer extends JPanel implements Pointable
     return shapes;
     }
 
-  public void pointerDown(Point point)
-    {
-    State.getCurrentState().pointerDown(point);
-    }
+  public void pointerDown(Point point) {State.getCurrentState().pointerDown(point);}
 
   public void pointerUp(Point point)
     {
