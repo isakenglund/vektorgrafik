@@ -108,19 +108,26 @@ public class CompositeShape implements Shape, Composite {
 
             shape.moveTo(new Point(topLeft.getX() + relativeX, topLeft.getY() + relativeY));
 
-            double newShapeWidth = shape.getWidth() * scaleX;
-            double newShapeHeight = shape.getHeight() * scaleY;
+            if (shape instanceof Circle) {
+                double avgScale = (scaleX + scaleY) / 2;
+                double newRadius = (shape.getWidth() / 2) * avgScale;
+                Point edgePoint = new Point(
+                        shape.getPosition().getX() + newRadius,
+                        shape.getPosition().getY()
+                );
+                shape.resizeTo(edgePoint);
+            } else {
+                double newShapeWidth = shape.getWidth() * scaleX;
+                double newShapeHeight = shape.getHeight() * scaleY;
 
-            Point newEndCorner = new Point(
-                    shape.getPosition().getX() + newShapeWidth,
-                    shape.getPosition().getY() + newShapeHeight
-            );
-
-            shape.resizeTo(newEndCorner);
+                Point newEndCorner = new Point(
+                        shape.getPosition().getX() + newShapeWidth,
+                        shape.getPosition().getY() + newShapeHeight
+                );
+                shape.resizeTo(newEndCorner);
+            }
         }
     }
-
-    @Override
     public Shape peel()
     {
         return new CompositeShape(topLeft, width, height, shapesList);
