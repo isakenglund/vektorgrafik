@@ -1,13 +1,10 @@
-package States;
+package states;
 
-import Main.ShapeApp;
-import Main.ShapeContainer;
-import Shapes.Circle;
-import Shapes.Point;
-import Shapes.Rectangle;
-
-import javax.swing.*;
-import java.awt.*;
+import main.ShapeApp;
+import main.ShapeContainer;
+import shapes.Circle;
+import shapes.Point;
+import shapes.Rectangle;
 
 public class StateInsert extends State {
 

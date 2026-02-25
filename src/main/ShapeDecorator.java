@@ -1,7 +1,7 @@
-package Main;
+package main;
 
-import Shapes.Point;
-import Shapes.Shape;
+import shapes.Point;
+import shapes.Shape;
 
 import java.awt.*;
 

@@ -1,10 +1,10 @@
-package States;
+package states;
 
-import Main.ShapeApp;
-import Shapes.Point;
+import main.ShapeApp;
+import shapes.Point;
 
-public class StateMove extends State {
-    public StateMove(ShapeApp app){
+public class StateResize extends State{
+    public StateResize(ShapeApp app){
         super(app);
     }
 
@@ -18,8 +18,13 @@ public class StateMove extends State {
     @Override
     public void pointerMoved(Point point, boolean pointerDown) {
         if(app.getShapeContainer().getSelected() != null && pointerDown) {
-            app.getShapeContainer().getSelected().moveTo(point);
+            app.getShapeContainer().getSelected().resizeTo(point);
             app.getShapeContainer().repaint();
         }
+    }
+
+    @Override
+    public void pointerUp(Point point) {
+        System.out.println(app.getShapeContainer().getShapes().size());
     }
 }

@@ -1,14 +1,13 @@
-package States;
+package states;
 
-import Main.RectangleDecorator;
-import Main.ShapeApp;
-import Main.ShapeContainer;
-import Main.ShapeDecorator;
-import Shapes.Point;
-import Shapes.Shape;
-
-import javax.swing.*;
-import java.awt.*;
+import main.CircleDecorator;
+import main.RectangleDecorator;
+import main.ShapeApp;
+import main.ShapeContainer;
+import shapes.Circle;
+import shapes.Point;
+import shapes.Rectangle;
+import shapes.Shape;
 
 public class StateMark extends State{
 
@@ -24,8 +23,14 @@ public class StateMark extends State{
 
         if(selected != null && !selected.isMarked())
         {
-            //Shape markedShape = new Main.CircleDecorator(selected);
-            Shape markedShape = new RectangleDecorator(selected);
+            Shape markedShape;
+            if(selected instanceof Circle) {
+                markedShape = new CircleDecorator(selected);
+            } else {
+                markedShape = new RectangleDecorator(selected);
+
+            }
+
             markedShape.setMarked(true);
             shapeContainer.removeShape(selected);
             shapeContainer.addShape(markedShape);

@@ -1,8 +1,8 @@
-package States;
+package states;
 
-import Main.Pointable;
-import Main.ShapeApp;
-import Shapes.Point;
+import main.Pointable;
+import main.ShapeApp;
+import shapes.Point;
 
 public abstract class State implements Pointable {
     private static State currentState;

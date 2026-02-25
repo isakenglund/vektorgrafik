@@ -1,7 +1,7 @@
-package States;
+package states;
 
-import Main.ShapeApp;
-import Shapes.Point;
+import main.ShapeApp;
+import shapes.Point;
 
 public class StateDelete extends State{
 
@@ -12,7 +12,7 @@ public class StateDelete extends State{
     @Override
     public void pointerDown(Point point) {
         app.getShapeContainer().select(point);
-        Shapes.Shape selected = app.getShapeContainer().getSelected();
+        shapes.Shape selected = app.getShapeContainer().getSelected();
         if (selected != null)
             app.getShapeContainer().removeShape(selected);
         app.getShapeContainer().setSelected(null);

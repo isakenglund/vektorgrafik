@@ -1,9 +1,9 @@
-package States;
+package states;
 
-import Shapes.CompositeShape;
-import Shapes.Point;
-import Main.ShapeApp;
-import Shapes.Shape;
+import shapes.CompositeShape;
+import shapes.Point;
+import main.ShapeApp;
+import shapes.Shape;
 
 import java.util.ArrayList;
 import java.util.List;

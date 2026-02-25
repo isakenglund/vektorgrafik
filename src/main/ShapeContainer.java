@@ -1,8 +1,7 @@
-package Main;
+package main;
 
-import Shapes.Circle;
-import Shapes.Point;
-import Shapes.Shape;
+import shapes.Point;
+import shapes.Shape;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -11,7 +10,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import States.State;
+import states.State;
 
 public class ShapeContainer extends JPanel implements Pointable
   {

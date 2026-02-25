@@ -1,6 +1,6 @@
-package Main;
+package main;
 
-import Shapes.Point;
+import shapes.Point;
 
 public interface Pointable
   {

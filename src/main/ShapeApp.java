@@ -1,6 +1,6 @@
-package Main;
+package main;
 
-import States.*;
+import states.*;
 
 import java.awt.event.ActionListener;
 

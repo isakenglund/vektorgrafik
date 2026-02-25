@@ -1,9 +1,9 @@
-package States;
+package states;
 
-import Main.ShapeApp;
-import Main.ShapeContainer;
-import Shapes.Point;
-import Shapes.Shape;
+import main.ShapeApp;
+import main.ShapeContainer;
+import shapes.Point;
+import shapes.Shape;
 
 public class StateUnmark extends State {
     public StateUnmark(ShapeApp app){
