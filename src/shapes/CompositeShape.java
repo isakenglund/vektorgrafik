@@ -96,8 +96,7 @@ public class CompositeShape implements Shape, Composite {
         this.height = point.getY() - topLeft.getY();
 
         if (oldWidth == 0 || oldHeight == 0) {
-            oldWidth = Double.MIN_VALUE;
-            oldHeight = Double.MIN_VALUE;
+            return;
         }
 
         double scaleX = this.width / oldWidth;
