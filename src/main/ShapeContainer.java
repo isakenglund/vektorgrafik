@@ -17,14 +17,7 @@ public class ShapeContainer extends JPanel implements Pointable
   private static final long serialVersionUID = 1L;
   private List<Shape>       shapes           = new LinkedList<>();
 
-
-    public enum Mode
-    {
-    INSERT, MOVE, DELETE, MARK, UNMARK, RESIZE
-    };
-
-  private Mode  mode = Mode.INSERT;
-  private Shape selected;
+      private Shape selected;
 
   public ShapeContainer()
     {
@@ -87,8 +80,4 @@ public class ShapeContainer extends JPanel implements Pointable
 
   public void pointerMoved(Point point, boolean pointerDown) {State.getCurrentState().pointerMoved(point, pointerDown);}
 
-  public void setMode(Mode mode)
-    {
-    this.mode = mode;
-    }
   }
