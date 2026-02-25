@@ -22,7 +22,7 @@ public abstract class State implements Pointable {
     }
 
     public static void reset(ShapeApp app){
-        setState(new StateInsert(app, "RECTANGLE"));
+        setState(new StateInsertCircle(app));
     }
 
     public static State getCurrentState(){

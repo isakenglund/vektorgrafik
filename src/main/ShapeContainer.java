@@ -88,10 +88,7 @@ public class ShapeContainer extends JPanel implements Pointable
       State.getCurrentState().pointerUp(point);
     }
 
-  public void pointerMoved(Point point, boolean pointerDown)
-    {
-    State.getCurrentState().pointerMoved(point, pointerDown);
-    }
+  public void pointerMoved(Point point, boolean pointerDown) {State.getCurrentState().pointerMoved(point, pointerDown);}
 
   public void setMode(Mode mode)
     {
