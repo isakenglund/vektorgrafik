@@ -11,16 +11,22 @@ import java.awt.*;
 
 public class StateInsert extends State {
 
-    public StateInsert(ShapeApp app) {
+    private String shapeType;
+    public StateInsert(ShapeApp app, String type) {
         super(app);
+        shapeType = type;
     }
 
     @Override
     public void pointerDown(Point point) {
         ShapeContainer shapes = app.getShapeContainer();
-       // shapes.addShape(new Circle(point, Math.random() * 50.0));
-        shapes.addShape(new Rectangle(point, Math.random() * 50.0 + 10,Math.random() * 50.0 + 10));
-        app.getShapeContainer().repaint(); // uppmanar swing att måla om
+        if (shapeType.equals("RECTANGLE")){
+            shapes.addShape(new Rectangle(point, Math.random() * 50.0 + 10,Math.random() * 50.0 + 10));
+
+        }else if( shapeType.equals("CIRCLE")){
+            shapes.addShape(new Circle(point, Math.random() * 50.0));
+        }
+        app.getShapeContainer().repaint();
     }
 }
 
