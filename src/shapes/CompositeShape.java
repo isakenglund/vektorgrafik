@@ -3,7 +3,7 @@ package shapes;
 import java.awt.*;
 import java.util.List;
 
-public class CompositeShape implements Shape {
+public class CompositeShape implements Shape, Composite {
 
     private Point topLeft;
     private double width, height;
@@ -124,7 +124,7 @@ public class CompositeShape implements Shape {
     @Override
     public Shape peel()
     {
-        return this;
+        return new CompositeShape(topLeft, width, height, shapesList);
     }
 
     @Override
@@ -135,5 +135,10 @@ public class CompositeShape implements Shape {
     @Override
     public boolean isMarked() {
         return this.marked;
+    }
+
+    @Override
+    public List<Shape> getChildren() {
+        return shapesList;
     }
 }

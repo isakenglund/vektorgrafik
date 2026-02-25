@@ -34,6 +34,7 @@ public class ShapeApp extends JFrame
     createMenuItem(menu, "Unmark", e -> State.setState(new StateUnmark(this)));
     createMenuItem(menu, "Resize", e -> State.setState(new StateResize(this)));
     createMenuItem(menu, "Merge", e -> State.setState(new StateMerge(this)));
+    createMenuItem(menu, "Unmerge", e -> State.setState(new StateUnmerge(this)));
 
     JMenuBar menuBar = new JMenuBar();
     menuBar.add(menu);
