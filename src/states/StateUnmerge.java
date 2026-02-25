@@ -20,11 +20,9 @@ public class StateUnmerge extends State {
         Shape selected = app.getShapeContainer().getSelected();
         ShapeContainer shapeContainer = app.getShapeContainer();
 
-        System.out.println(selected);
         if(selected instanceof Composite)
         {
             List<Shape> unmergeShape = ((Composite) selected).getChildren();
-            System.out.println(unmergeShape.size());
             for(Shape shape: unmergeShape) {
                 shapeContainer.addShape(shape);
             }

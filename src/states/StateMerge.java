@@ -44,7 +44,6 @@ public class StateMerge extends State {
         double height = Math.abs(pointDown.getY() - point.getY());
 
         app.getShapeContainer().addShape(new CompositeShape(x, y, width, height, shapesInMerge));
-        System.out.println(app.getShapeContainer().getShapes().size());
         app.getShapeContainer().repaint();
     }
 
@@ -60,12 +59,10 @@ public class StateMerge extends State {
             )
             {
                 shapesInMerge.add(shape);
-                System.out.println("shape in merge");
             }
         });
 
         app.getShapeContainer().getShapes().removeAll(shapesInMerge);
-
 
         return shapesInMerge;
     }
