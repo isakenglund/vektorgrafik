@@ -18,8 +18,8 @@ public class RectangleDecorator extends ShapeDecorator{
     {
         super.draw(g);
         Point position = super.getPosition();
-        int x = (int)(position.getX()-super.getWidth()/2.0-1);
-        int y = (int)(position.getY()-super.getHeight()/2.0-1);
+        int x = (int)(position.getX()-1);
+        int y = (int)(position.getY()-1);
         g.drawRect(x,y,(int)(super.getWidth()+2),(int)(super.getHeight()+2));
     }
 }

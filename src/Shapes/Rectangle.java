@@ -24,7 +24,7 @@ public class Rectangle implements Shape {
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.black);
-        g.drawRect((int)(center.getX()-width/2.0), (int)(center.getY()-height/2.0), (int)width, (int)height);
+        g.drawRect((int)(center.getX()), (int)(center.getY()), (int)width, (int)height);
     }
 
     @Override

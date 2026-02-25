@@ -77,7 +77,6 @@ public class CompositeShape implements Shape {
     @Override
     public void resizeTo(Point point)
     {
-        for(Shape shape : shapesList) shape.resizeTo(point);
         this.width = Math.abs(point.getX() - center.getX()) * 2.0;
         this.height = Math.abs(point.getY() - center.getY()) * 2.0;
     }
