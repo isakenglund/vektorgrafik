@@ -55,8 +55,8 @@ public class ShapeApp extends JFrame
     createPanelButton(steps, "<-", e -> State.setState(new StateMove(this)));
     createPanelButton(steps, "->", e -> State.setState(new StateMove(this)));
 
-    createPanelButton(manipulate, "Rz", e -> State.setState(new StateMove(this)));
-    createPanelButton(manipulate, "Ro", e -> State.setState(new StateMove(this)));
+    createPanelButton(manipulate, "Rz", e -> State.setState(new StateResize(this)));
+    createPanelButton(manipulate, "Ro", e -> State.setState(new StateRotate(this)));
 
     toolbox.add(manipulate,BorderLayout.WEST);
     toolbox.add(shapes, BorderLayout.CENTER);

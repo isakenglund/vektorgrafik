@@ -69,4 +69,20 @@ public abstract class Shape
     public boolean isMarked() {
       return marked;
     }
+
+    public void rotateTo(Point point) {
+      double dx = point.getX() - topLeft.getX();
+      double dy = point.getY() - topLeft.getY();
+
+      double theta = Math.atan2(dy, dx); // radianer
+
+      double w = this.width;
+      double h = this.height;
+
+      double cos = Math.abs(Math.cos(theta));
+      double sin = Math.abs(Math.sin(theta));
+
+      this.width  = w * cos + h * sin;
+      this.height = w * sin + h * cos;
+    }
   }
