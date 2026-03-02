@@ -8,6 +8,7 @@ public abstract class Shape
     private Point topLeft;
     private double width, height;
     private boolean marked;
+    private double rotationRadians = 0.0;
 
     public Shape(double x, double y, double width, double height) {
       this.topLeft = new Point(x,y);
@@ -21,6 +22,11 @@ public abstract class Shape
     }
 
     public abstract void draw(Graphics g);
+
+    public double getRotationRadians() { return rotationRadians; }
+
+    protected double centerX() { return topLeft.getX() + width / 2.0; }
+    protected double centerY() { return topLeft.getY() + height / 2.0; }
 
     public Point getPosition() {
       return this.topLeft;
@@ -71,18 +77,12 @@ public abstract class Shape
     }
 
     public void rotateTo(Point point) {
-      double dx = point.getX() - topLeft.getX();
-      double dy = point.getY() - topLeft.getY();
+      double dx = point.getX() - centerX();
+      double dy = point.getY() - centerY();
 
-      double theta = Math.atan2(dy, dx); // radianer
+      rotationRadians = Math.atan2(dy, dx); // radianer
 
-      double w = this.width;
-      double h = this.height;
-
-      double cos = Math.abs(Math.cos(theta));
-      double sin = Math.abs(Math.sin(theta));
-
-      this.width  = w * cos + h * sin;
-      this.height = w * sin + h * cos;
+      int degrees = (int) Math.toDegrees(rotationRadians);
+      System.out.println(degrees);
     }
   }

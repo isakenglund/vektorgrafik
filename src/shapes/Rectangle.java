@@ -11,15 +11,22 @@ public class Rectangle extends Shape {
         this(p.getX(),p.getY(),width,height);
     }
 
+
     @Override
     public void draw(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
 
-        int drawX = (int) (super.getWidth() < 0 ? super.getPosition().getX() + super.getWidth() : super.getPosition().getX());
-        int drawY = (int) (super.getHeight() < 0 ? super.getPosition().getY() + super.getHeight() : super.getPosition().getY());
+        int drawX = (int) (getWidth() < 0 ? getPosition().getX() + getWidth() : getPosition().getX());
+        int drawY = (int) (getHeight() < 0 ? getPosition().getY() + getHeight() : getPosition().getY());
+        int drawWidth  = (int) Math.abs(getWidth());
+        int drawHeight = (int) Math.abs(getHeight());
 
-        int drawWidth = (int) Math.abs(super.getWidth());
-        int drawHeight = (int) Math.abs(super.getHeight());
+        double cx = drawX + drawWidth / 2.0;
+        double cy = drawY + drawHeight / 2.0;
 
-        g.drawRect(drawX, drawY, drawWidth, drawHeight);
+        var old = g2.getTransform();
+        g2.rotate(getRotationRadians(), cx, cy);
+        g2.drawRect(drawX, drawY, drawWidth, drawHeight);
+        g2.setTransform(old);
     }
 }
