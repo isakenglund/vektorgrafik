@@ -5,12 +5,13 @@ import shapes.Shape;
 
 import java.awt.*;
 
-public abstract class ShapeDecorator implements Shape
+public abstract class ShapeDecorator extends Shape
   {
   private final Shape decoratee;
 
   public ShapeDecorator(Shape decoratee)
     {
+      super(decoratee.getPosition(), decoratee.getWidth(), decoratee.getHeight());
     this.decoratee = decoratee;
     }
   @Override

@@ -3,7 +3,8 @@ package states;
 import main.ShapeApp;
 import shapes.Point;
 
-public class StateMove extends State {
+public class
+StateMove extends State {
     public StateMove(ShapeApp app){
         super(app);
     }

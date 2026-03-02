@@ -3,7 +3,7 @@ package shapes;
 import java.awt.*;
 import java.util.List;
 
-public class CompositeShape implements Shape, Composite {
+public class CompositeShape extends Shape implements Composite {
 
     private Point topLeft;
     private double width, height;
@@ -12,10 +12,8 @@ public class CompositeShape implements Shape, Composite {
 
     public CompositeShape(double x, double y, double width, double height, List<Shape> shapesList)
     {
-        topLeft = new Point(x,y);
-        this.width = width;
-        this.height = height;
-        this.marked = false;
+
+        super(x,y,width,height);
         this.shapesList = shapesList;
 
     }

@@ -3,11 +3,12 @@ package states;
 import main.Pointable;
 import main.ShapeApp;
 import shapes.Point;
+import states.shapes.StateInsertCircle;
 
 public abstract class State implements Pointable {
     private static State currentState;
 
-    ShapeApp app;
+    protected ShapeApp app;
 
     public State(ShapeApp app){
         this.app = app;
