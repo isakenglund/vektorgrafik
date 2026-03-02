@@ -18,7 +18,7 @@ public class ShapeApp extends JFrame
     createToolbox();
     this.add(shapeContainer);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(400,400);
+    this.setSize(800,800);
     this.setVisible(true);
     State.reset(this);
   }
@@ -42,16 +42,29 @@ public class ShapeApp extends JFrame
 
   private void createToolbox() {
     JPanel toolbox = new JPanel();
-    toolbox.setSize(100, 400);
-    createDrawButton(toolbox, "Circle", e -> State.setState(new StateInsertCircle(this)));
-    createDrawButton(toolbox, "Rectangle", e -> State.setState(new StateInsertRectangle(this)));
-    createDrawButton(toolbox, "Line", e -> State.setState(new StateInsertLine(this)));
-    createDrawButton(toolbox, "Triangle", e -> State.setState(new StateInsertTriangle((this))));
-    createDrawButton(toolbox, "Polygon", e -> State.setState(new StateInsertPentagon((this))));
+    JPanel shapes = new JPanel();
+    JPanel steps = new JPanel();
+    JPanel manipulate = new JPanel();
+
+    createPanelButton(shapes, "C", e -> State.setState(new StateInsertCircle(this)));
+    createPanelButton(shapes, "R", e -> State.setState(new StateInsertRectangle(this)));
+    createPanelButton(shapes, "L", e -> State.setState(new StateInsertLine(this)));
+    createPanelButton(shapes, "T", e -> State.setState(new StateInsertTriangle((this))));
+    createPanelButton(shapes, "P", e -> State.setState(new StateInsertPentagon((this))));
+
+    createPanelButton(steps, "<-", e -> State.setState(new StateMove(this)));
+    createPanelButton(steps, "->", e -> State.setState(new StateMove(this)));
+
+    createPanelButton(manipulate, "Rz", e -> State.setState(new StateMove(this)));
+    createPanelButton(manipulate, "Ro", e -> State.setState(new StateMove(this)));
+
+    toolbox.add(manipulate,BorderLayout.WEST);
+    toolbox.add(shapes, BorderLayout.CENTER);
+    toolbox.add(steps, BorderLayout.EAST);
     this.add(toolbox, BorderLayout.SOUTH);
   }
 
-  private void createDrawButton(JPanel panel, String label, ActionListener listener) {
+  private void createPanelButton(JPanel panel, String label, ActionListener listener) {
     JButton button = new JButton(label);
     button.addActionListener(listener);
     panel.add(button);
