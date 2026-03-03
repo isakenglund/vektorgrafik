@@ -12,9 +12,9 @@ public class CompositeShape extends Shape implements Composite {
 
     public CompositeShape(double x, double y, double width, double height, List<Shape> shapesList)
     {
-
         super(x,y,width,height);
         this.shapesList = shapesList;
+        this.topLeft = new Point(x,y);
 
     }
 
@@ -27,15 +27,23 @@ public class CompositeShape extends Shape implements Composite {
     @Override
     public void draw(Graphics g)
     {
-        g.setColor(Color.black);
-        shapesList.forEach(shape -> shape.draw(g));
+        Graphics2D g2 = (Graphics2D) g;
+
+        g2.setColor(Color.black);
+        shapesList.forEach(shape -> shape.draw(g2));
 
         int drawX = (int) (width < 0 ? topLeft.getX() + width : topLeft.getX());
         int drawY = (int) (height < 0 ? topLeft.getY() + height : topLeft.getY());
         int drawWidth = (int) Math.abs(width);
         int drawHeight = (int) Math.abs(height);
 
-        g.drawRect(drawX, drawY, drawWidth, drawHeight);
+        double cx = drawX + drawWidth / 2.0;
+        double cy = drawY + drawHeight / 2.0;
+
+        var old = g2.getTransform();
+        g2.rotate(getRotationRadians(), cx, cy);
+        g2.drawRect(drawX, drawY, drawWidth, drawHeight);
+        g2.setTransform(old);
     }
 
     @Override

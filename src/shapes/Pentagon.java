@@ -14,6 +14,8 @@ public class Pentagon extends Shape {
 
     @Override
     public void draw(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+
         double angleStep = 2 * Math.PI / 5;
         double startAngle = -Math.PI / 2; // Spetsen uppåt
 
@@ -21,7 +23,11 @@ public class Pentagon extends Shape {
             xPoints[i] = (int) (super.getPosition().getX() + super.getWidth() / 2 + (super.getWidth() / 2) * Math.cos(startAngle + i * angleStep));
             yPoints[i] = (int) (super.getPosition().getY() + super.getHeight() / 2 + (super.getHeight() / 2) * Math.sin(startAngle + i * angleStep));
         }
-        g.drawPolygon(new Polygon(xPoints,yPoints,5));
+
+        var old = g2.getTransform();
+        g2.rotate(getRotationRadians(), super.getPosition().getX() + super.getWidth() / 2, super.getPosition().getY() + super.getHeight() / 2);
+        g2.drawPolygon(new Polygon(xPoints,yPoints,5));
+        g2.setTransform(old);
     }
 
 }
