@@ -17,15 +17,15 @@ public class Triangle extends Shape {
     public void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
 
-        int rightX = (int) (super.getPosition().getX() + super.getWidth());
-        int middleX = (int) (super.getPosition().getX() + super.getWidth() / 2);
-        int leftX = (int) (super.getPosition().getX());
+        int rightX = (int) (getPosition().getX() + getWidth());
+        int middleX = (int) (getPosition().getX() + getWidth() / 2);
+        int leftX = (int) (getPosition().getX());
 
-        int topY = (int) (super.getPosition().getY());
-        int bottomY = (int) (super.getPosition().getY() + super.getHeight());
+        int topY = (int) (getPosition().getY());
+        int bottomY = (int) (getPosition().getY() + getHeight());
 
-        double cx = leftX + super.getWidth() / 2.0;
-        double cy = bottomY - super.getHeight() / 3.0;
+        double cx = leftX + getWidth() / 2.0;
+        double cy = bottomY - getHeight() / 3.0;
 
         var old = g2.getTransform();
         g2.rotate(getRotationRadians(),cx,cy);

@@ -9,6 +9,7 @@ public abstract class Shape
     private double width, height;
     private boolean marked;
     private double rotationRadians = 0.0;
+    private double currentRotationRadians = 0.0;
 
     public Shape(double x, double y, double width, double height) {
       this.topLeft = new Point(x,y);
@@ -36,6 +37,14 @@ public abstract class Shape
       return this.width;
     }
 
+    public void setWidth(double width) {
+      this.width = width;
+    }
+
+    public void setHeight(double height) {
+      this.height = height;
+    }
+
     public double getHeight() {
       return this.height;
     }
@@ -60,8 +69,21 @@ public abstract class Shape
     }
 
     public void resizeTo(Point point) {
-      this.width = point.getX() - topLeft.getX();
-      this.height = point.getY() - topLeft.getY();;
+
+      double cx = centerX();
+      double cy = centerY();
+
+      double dx = point.getX() - cx;
+      double dy = point.getY() - cy;
+
+      double cos = Math.cos(currentRotationRadians);
+      double sin = Math.sin(currentRotationRadians);
+
+      double localX =  cos * dx + sin * dy;
+      double localY = -sin * dx + cos * dy;
+
+      this.width  = localX;
+      this.height = localY;
     }
 
     public Shape peel() {
@@ -81,8 +103,6 @@ public abstract class Shape
       double dy = point.getY() - centerY();
 
       rotationRadians = Math.atan2(dy, dx); // radianer
-
-      int degrees = (int) Math.toDegrees(rotationRadians);
-      System.out.println(degrees);
+      this.currentRotationRadians = rotationRadians;
     }
   }

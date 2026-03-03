@@ -20,12 +20,12 @@ public class Pentagon extends Shape {
         double startAngle = -Math.PI / 2; // Spetsen uppåt
 
         for (int i = 0; i < 5; i++) {
-            xPoints[i] = (int) (super.getPosition().getX() + super.getWidth() / 2 + (super.getWidth() / 2) * Math.cos(startAngle + i * angleStep));
-            yPoints[i] = (int) (super.getPosition().getY() + super.getHeight() / 2 + (super.getHeight() / 2) * Math.sin(startAngle + i * angleStep));
+            xPoints[i] = (int) (getPosition().getX() + getWidth() / 2 + (getWidth() / 2) * Math.cos(startAngle + i * angleStep));
+            yPoints[i] = (int) (getPosition().getY() + getHeight() / 2 + (getHeight() / 2) * Math.sin(startAngle + i * angleStep));
         }
 
         var old = g2.getTransform();
-        g2.rotate(getRotationRadians(), super.getPosition().getX() + super.getWidth() / 2, super.getPosition().getY() + super.getHeight() / 2);
+        g2.rotate(getRotationRadians(), getPosition().getX() + getWidth() / 2, getPosition().getY() + getHeight() / 2);
         g2.drawPolygon(new Polygon(xPoints,yPoints,5));
         g2.setTransform(old);
     }

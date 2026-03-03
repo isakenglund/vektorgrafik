@@ -12,13 +12,13 @@ public class Line extends Shape {
     public void draw(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
 
-        double cx = super.getPosition().getX() + super.getWidth() / 2.0;
-        double cy = super.getPosition().getY() + super.getHeight() / 2.0;
+        double cx = getPosition().getX() + getWidth() / 2.0;
+        double cy = getPosition().getY() + getHeight() / 2.0;
 
         var old = g2.getTransform();
         g2.rotate(getRotationRadians(), cx, cy);
-        g2.drawLine((int) super.getPosition().getX(), (int) super.getPosition().getY(),
-                (int) (super.getPosition().getX() + super.getWidth()), (int) (super.getPosition().getY() + super.getHeight()));
+        g2.drawLine((int) getPosition().getX(), (int) getPosition().getY(),
+                (int) (getPosition().getX() + getWidth()), (int) (getPosition().getY() + getHeight()));
         g2.setTransform(old);
     }
 }

@@ -5,23 +5,17 @@ import java.util.List;
 
 public class CompositeShape extends Shape implements Composite {
 
-    private Point topLeft;
-    private double width, height;
-    private boolean marked;
     private List<Shape> shapesList;
 
     public CompositeShape(double x, double y, double width, double height, List<Shape> shapesList)
     {
         super(x,y,width,height);
         this.shapesList = shapesList;
-        this.topLeft = new Point(x,y);
-
     }
 
     public CompositeShape(Point point, double width, double height, List<Shape> shapesList)
     {
         this(point.getX(), point.getY(),width,height, shapesList);
-        this.marked = false;
     }
 
     @Override
@@ -32,87 +26,63 @@ public class CompositeShape extends Shape implements Composite {
         g2.setColor(Color.black);
         shapesList.forEach(shape -> shape.draw(g2));
 
-        int drawX = (int) (width < 0 ? topLeft.getX() + width : topLeft.getX());
-        int drawY = (int) (height < 0 ? topLeft.getY() + height : topLeft.getY());
-        int drawWidth = (int) Math.abs(width);
-        int drawHeight = (int) Math.abs(height);
+        int drawX = (int) (getWidth() < 0 ? getPosition().getX() + getWidth() : getPosition().getX());
+        int drawY = (int) (getHeight() < 0 ? getPosition().getY() + getHeight() : getPosition().getY());
+        int drawWidth = (int) Math.abs(getWidth());
+        int drawHeight = (int) Math.abs(getHeight());
+
+        g2.drawRect(drawX, drawY, drawWidth, drawHeight);
 
         double cx = drawX + drawWidth / 2.0;
         double cy = drawY + drawHeight / 2.0;
 
         var old = g2.getTransform();
-        g2.rotate(getRotationRadians(), cx, cy);
-        g2.drawRect(drawX, drawY, drawWidth, drawHeight);
-        g2.setTransform(old);
+
+        shapesList.forEach(shape -> {
+            g2.rotate(shape.getRotationRadians(), cx, cy);
+            shape.draw(g2);
+            g2.setTransform(old);
+        });
     }
 
-    @Override
-    public Point getPosition()
-    {
-        return topLeft;
-    }
-
-    @Override
-    public double getWidth()
-    {
-        return this.width;
-    }
-
-    @Override
-    public double getHeight()
-    {
-        return this.height;
-    }
-
-    @Override
-    public boolean intersects(Point point)
-    {
-        double minX = Math.min(topLeft.getX(), topLeft.getX() + width);
-        double maxX = Math.max(topLeft.getX(), topLeft.getX() + width);
-
-        double minY = Math.min(topLeft.getY(), topLeft.getY() + height);
-        double maxY = Math.max(topLeft.getY(), topLeft.getY() + height);
-
-        return point.getX() >= minX && point.getX() <= maxX &&
-                point.getY() >= minY && point.getY() <= maxY;
-    }
 
     @Override
     public void moveTo(Point point)
     {
-        double dx = point.getX() - topLeft.getX();
-        double dy = point.getY() - topLeft.getY();
+        super.moveTo(point);
+        double dx = point.getX() - getPosition().getX();
+        double dy = point.getY() - getPosition().getY();
         for(Shape shape : shapesList) shape.move(dx, dy);
-        topLeft.moveTo(point);
     }
 
     @Override
     public void move(double dx, double dy)
     {
         for(Shape shape : shapesList) shape.move(dx, dy);
-        topLeft.move(dx, dy);
+        getPosition().move(dx, dy);
     }
 
     @Override
     public void resizeTo(Point point) {
-        double oldWidth = this.width;
-        double oldHeight = this.height;
+        System.out.println("resizeTo:");
+        double oldWidth = getWidth();
+        double oldHeight = getHeight();
 
-        this.width = point.getX() - topLeft.getX();
-        this.height = point.getY() - topLeft.getY();
+        setWidth(point.getX() - getPosition().getX());
+        setHeight(point.getY() - getPosition().getY());
 
         if (oldWidth == 0 || oldHeight == 0) {
             return;
         }
 
-        double scaleX = this.width / oldWidth;
-        double scaleY = this.height / oldHeight;
+        double scaleX = getWidth() / oldWidth;
+        double scaleY = getHeight() / oldHeight;
 
         for (Shape shape : shapesList) {
-            double relativeX = (shape.getPosition().getX() - topLeft.getX()) * scaleX;
-            double relativeY = (shape.getPosition().getY() - topLeft.getY()) * scaleY;
+            double relativeX = (shape.getPosition().getX() - getPosition().getX()) * scaleX;
+            double relativeY = (shape.getPosition().getY() - getPosition().getY()) * scaleY;
 
-            shape.moveTo(new Point(topLeft.getX() + relativeX, topLeft.getY() + relativeY));
+            shape.moveTo(new Point(getPosition().getX() + relativeX, getPosition().getY() + relativeY));
 
             if (shape instanceof Circle) {
                 double avgScale = (scaleX + scaleY) / 2;
@@ -136,21 +106,18 @@ public class CompositeShape extends Shape implements Composite {
     }
     public Shape peel()
     {
-        return new CompositeShape(topLeft, width, height, shapesList);
-    }
-
-    @Override
-    public void setMarked(boolean marked) {
-        this.marked = marked;
-    }
-
-    @Override
-    public boolean isMarked() {
-        return this.marked;
+        return new CompositeShape(getPosition(), getWidth(), getHeight(), shapesList);
     }
 
     @Override
     public List<Shape> getChildren() {
         return shapesList;
+    }
+
+    @Override
+    public void rotateTo(Point point) {
+        for(Shape shape : shapesList) shape.rotateTo(point);
+        super.rotateTo(point);
+        System.out.println("nu roterar vi.");
     }
 }
