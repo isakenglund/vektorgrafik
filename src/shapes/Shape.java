@@ -105,4 +105,5 @@ public abstract class Shape
       rotationRadians = Math.atan2(dy, dx); // radianer
       this.currentRotationRadians = rotationRadians;
     }
+
   }

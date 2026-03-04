@@ -24,7 +24,7 @@ public class CompositeShape extends Shape implements Composite {
         Graphics2D g2 = (Graphics2D) g;
 
         g2.setColor(Color.black);
-        shapesList.forEach(shape -> shape.draw(g2));
+        //shapesList.forEach(shape -> shape.draw(g2));
 
         int drawX = (int) (getWidth() < 0 ? getPosition().getX() + getWidth() : getPosition().getX());
         int drawY = (int) (getHeight() < 0 ? getPosition().getY() + getHeight() : getPosition().getY());
@@ -38,21 +38,25 @@ public class CompositeShape extends Shape implements Composite {
 
         var old = g2.getTransform();
 
+
         shapesList.forEach(shape -> {
             g2.rotate(shape.getRotationRadians(), cx, cy);
             shape.draw(g2);
             g2.setTransform(old);
         });
+
     }
 
 
     @Override
     public void moveTo(Point point)
     {
-        super.moveTo(point);
         double dx = point.getX() - getPosition().getX();
         double dy = point.getY() - getPosition().getY();
-        for(Shape shape : shapesList) shape.move(dx, dy);
+        super.moveTo(point);
+        for(Shape shape : shapesList){
+            shape.move(dx, dy);
+        };
     }
 
     @Override
@@ -64,7 +68,6 @@ public class CompositeShape extends Shape implements Composite {
 
     @Override
     public void resizeTo(Point point) {
-        System.out.println("resizeTo:");
         double oldWidth = getWidth();
         double oldHeight = getHeight();
 
@@ -118,6 +121,5 @@ public class CompositeShape extends Shape implements Composite {
     public void rotateTo(Point point) {
         for(Shape shape : shapesList) shape.rotateTo(point);
         super.rotateTo(point);
-        System.out.println("nu roterar vi.");
     }
 }
