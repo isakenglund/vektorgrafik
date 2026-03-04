@@ -1,8 +1,10 @@
 package shapes;
 
+import main.LineWidth;
+
 import java.awt.*;
 
-public abstract class Shape
+public abstract class Shape implements Cloneable
   {
 
     private Point topLeft;
@@ -22,7 +24,10 @@ public abstract class Shape
       this.marked = false;
     }
 
-    public abstract void draw(Graphics g);
+    public void draw(Graphics g) {
+      Graphics2D g2 = (Graphics2D) g;
+      g2.setStroke(new BasicStroke(LineWidth.getInstance().getWidth()));
+    };
 
     public double getRotationRadians() { return rotationRadians; }
 
@@ -106,4 +111,20 @@ public abstract class Shape
       this.currentRotationRadians = rotationRadians;
     }
 
+      @Override
+      public Shape clone() {
+          try {
+              Shape clone = (Shape) super.clone();
+              clone.topLeft = new Point(topLeft);
+              clone.width = width;
+              clone.height = height;
+              clone.marked = marked;
+              clone.rotationRadians = rotationRadians;
+              clone.currentRotationRadians = currentRotationRadians;
+              // TODO: copy mutable state here, so the clone can't change the internals of the original
+              return clone;
+          } catch (CloneNotSupportedException e) {
+              throw new AssertionError();
+          }
+      }
   }

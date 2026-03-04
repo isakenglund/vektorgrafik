@@ -16,8 +16,8 @@ public class ShapeContainer extends JPanel implements Pointable
   {
   private static final long serialVersionUID = 1L;
   private List<Shape>       shapes           = new LinkedList<>();
+  private Shape selected;
 
-      private Shape selected;
 
   public ShapeContainer()
     {

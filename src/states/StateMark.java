@@ -23,13 +23,7 @@ public class StateMark extends State{
 
         if(selected != null && !selected.isMarked())
         {
-            Shape markedShape;
-            if(selected instanceof Circle) {
-                markedShape = new CircleDecorator(selected);
-            } else {
-                markedShape = new RectangleDecorator(selected);
-
-            }
+            Shape markedShape = new RectangleDecorator(selected);
 
             markedShape.setMarked(true);
             shapeContainer.removeShape(selected);

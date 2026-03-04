@@ -1,10 +1,13 @@
 package main;
 
+import shapes.Shape;
 import states.*;
 import states.shapes.*;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.LinkedList;
 
 import javax.swing.*;
 
@@ -12,6 +15,7 @@ public class ShapeApp extends JFrame
 {
   private static final long serialVersionUID = 1L;
   private ShapeContainer shapeContainer = new ShapeContainer();
+
   public ShapeApp()
   {
     createMenue();
@@ -31,9 +35,6 @@ public class ShapeApp extends JFrame
     createMenuItem(menu, "Mark", e -> State.setState(new StateMark(this)));
     createMenuItem(menu, "Unmark", e -> State.setState(new StateUnmark(this)));
     createMenuItem(menu, "Resize", e -> State.setState(new StateResize(this)));
-    createMenuItem(menu, "Merge", e -> State.setState(new StateMerge(this)));
-    createMenuItem(menu, "Unmerge", e -> State.setState(new StateUnmerge(this)));
-
 
     JMenuBar menuBar = new JMenuBar();
     menuBar.add(menu);
@@ -45,6 +46,12 @@ public class ShapeApp extends JFrame
     JPanel shapes = new JPanel();
     JPanel steps = new JPanel();
     JPanel manipulate = new JPanel();
+    JPanel objectTools = new JPanel();
+
+    createPanelButton(manipulate, "Mv", e -> State.setState(new StateMove(this)));
+    createPanelButton(manipulate, "Rz", e -> State.setState(new StateResize(this)));
+    createPanelButton(manipulate, "Ro", e -> State.setState(new StateRotate(this)));
+    createPanelButton(manipulate, "Del", e -> State.setState(new StateDelete(this)));
 
     createPanelButton(shapes, "C", e -> State.setState(new StateInsertCircle(this)));
     createPanelButton(shapes, "R", e -> State.setState(new StateInsertRectangle(this)));
@@ -52,15 +59,18 @@ public class ShapeApp extends JFrame
     createPanelButton(shapes, "T", e -> State.setState(new StateInsertTriangle((this))));
     createPanelButton(shapes, "P", e -> State.setState(new StateInsertPentagon((this))));
 
-    createPanelButton(steps, "<-", e -> State.setState(new StateMove(this)));
-    createPanelButton(steps, "->", e -> State.setState(new StateMove(this)));
+    createPanelButton(steps, "<<", e -> State.setState(new StateMove(this)));
+    createPanelButton(steps, ">>", e -> State.setState(new StateMove(this)));
 
-    createPanelButton(manipulate, "Rz", e -> State.setState(new StateResize(this)));
-    createPanelButton(manipulate, "Ro", e -> State.setState(new StateRotate(this)));
+    createPanelButton(objectTools, "Red", e -> State.setState(new StateMark(this)));
+    createPanelButton(objectTools, "Blue", e -> State.setState(new StateMark(this)));
+    createPanelButton(objectTools, "-", e -> LineWidth.getInstance().setWidth(LineWidth.getInstance().getWidth() - 1));
+    createPanelButton(objectTools, "+", e -> LineWidth.getInstance().setWidth(LineWidth.getInstance().getWidth()+1));
 
     toolbox.add(manipulate,BorderLayout.WEST);
     toolbox.add(shapes, BorderLayout.CENTER);
     toolbox.add(steps, BorderLayout.EAST);
+    toolbox.add(objectTools, BorderLayout.EAST);
     this.add(toolbox, BorderLayout.SOUTH);
   }
 

@@ -17,9 +17,9 @@ public class RectangleDecorator extends ShapeDecorator{
     public void draw(Graphics g)
     {
         super.draw(g);
-        Point position = super.getPosition();
-        double width = super.getWidth();
-        double height = super.getHeight();
+        Point position = getPosition();
+        double width = getWidth();
+        double height = getHeight();
 
         int x = (int)(width < 0 ? position.getX() + width - 1 : position.getX() - 1);
         int y = (int)(height < 0 ? position.getY() + height - 1 : position.getY() - 1);
@@ -27,5 +27,6 @@ public class RectangleDecorator extends ShapeDecorator{
         int h = (int)(Math.abs(height) + 2);
 
         g.drawRect(x, y, w, h);
+
     }
 }

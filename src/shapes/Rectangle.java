@@ -14,6 +14,7 @@ public class Rectangle extends Shape {
 
     @Override
     public void draw(Graphics g) {
+        super.draw(g);
         Graphics2D g2 = (Graphics2D) g;
 
         int drawX = (int) (getWidth() < 0 ? getPosition().getX() + getWidth() : getPosition().getX());
