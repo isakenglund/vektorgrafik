@@ -1,20 +1,17 @@
 package states;
 
-import main.CircleDecorator;
-import main.RectangleDecorator;
 import main.ShapeApp;
 import main.ShapeContainer;
-import shapes.Circle;
+import main.ShapeDecorator;
 import shapes.Point;
-import shapes.Rectangle;
 import shapes.Shape;
 
 public class StateMark extends State{
 
-
     public StateMark(ShapeApp app){
         super(app);
     }
+
     @Override
     public void pointerDown(Point point) {
         app.getShapeContainer().select(point);
@@ -23,8 +20,7 @@ public class StateMark extends State{
 
         if(selected != null && !selected.isMarked())
         {
-            Shape markedShape = new RectangleDecorator(selected);
-
+            Shape markedShape = new ShapeDecorator(selected);
             markedShape.setMarked(true);
             shapeContainer.removeShape(selected);
             shapeContainer.addShape(markedShape);

@@ -1,20 +1,21 @@
 package shapes;
 
 import java.awt.*;
+import shapes.style.Style;
 
 public class Pentagon extends Shape {
     int[] xPoints;
     int[] yPoints;
 
-    public Pentagon(Point point, double width, double height) {
-        super(point, width, height);
+    public Pentagon(Point point, double width, double height, Style style) {
+        super(point.getX(), point.getY(), width, height, style);
         this.xPoints = new int[5];
         this.yPoints = new int[5];
     }
 
     @Override
     public void draw(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
+        super.draw(g);
 
         double angleStep = 2 * Math.PI / 5;
         double startAngle = -Math.PI / 2; // Spetsen uppåt
@@ -24,10 +25,7 @@ public class Pentagon extends Shape {
             yPoints[i] = (int) (getPosition().getY() + getHeight() / 2 + (getHeight() / 2) * Math.sin(startAngle + i * angleStep));
         }
 
-        var old = g2.getTransform();
-        g2.rotate(getRotationRadians(), getPosition().getX() + getWidth() / 2, getPosition().getY() + getHeight() / 2);
-        g2.drawPolygon(new Polygon(xPoints,yPoints,5));
-        g2.setTransform(old);
+        g.drawPolygon(new Polygon(xPoints,yPoints,5));
     }
 
 }

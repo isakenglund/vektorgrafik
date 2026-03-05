@@ -44,7 +44,6 @@ public class ShapeContainer extends JPanel implements Pointable
 
       for (Shape shape : shapes)
         shape.draw(g);
-
     }
 
   public void select(Point point)

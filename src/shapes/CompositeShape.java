@@ -1,5 +1,7 @@
 package shapes;
 
+import shapes.style.Style;
+
 import java.awt.*;
 import java.util.List;
 
@@ -7,42 +9,27 @@ public class CompositeShape extends Shape implements Composite {
 
     private List<Shape> shapesList;
 
-    public CompositeShape(double x, double y, double width, double height, List<Shape> shapesList)
+    public CompositeShape(double x, double y, double width, double height, List<Shape> shapesList, Style style)
     {
-        super(x,y,width,height);
+        super(x,y,width,height, style);
         this.shapesList = shapesList;
     }
 
-    public CompositeShape(Point point, double width, double height, List<Shape> shapesList)
-    {
-        this(point.getX(), point.getY(),width,height, shapesList);
-    }
 
     @Override
     public void draw(Graphics g)
     {
-        Graphics2D g2 = (Graphics2D) g;
-
-        g2.setColor(Color.black);
-        //shapesList.forEach(shape -> shape.draw(g2));
+        super.draw(g);
 
         int drawX = (int) (getWidth() < 0 ? getPosition().getX() + getWidth() : getPosition().getX());
         int drawY = (int) (getHeight() < 0 ? getPosition().getY() + getHeight() : getPosition().getY());
         int drawWidth = (int) Math.abs(getWidth());
         int drawHeight = (int) Math.abs(getHeight());
 
-        g2.drawRect(drawX, drawY, drawWidth, drawHeight);
-
-        double cx = drawX + drawWidth / 2.0;
-        double cy = drawY + drawHeight / 2.0;
-
-        var old = g2.getTransform();
-
+        g.drawRect(drawX, drawY, drawWidth, drawHeight);
 
         shapesList.forEach(shape -> {
-            g2.rotate(shape.getRotationRadians(), cx, cy);
-            shape.draw(g2);
-            g2.setTransform(old);
+            shape.draw(g);
         });
 
     }
@@ -109,7 +96,7 @@ public class CompositeShape extends Shape implements Composite {
     }
     public Shape peel()
     {
-        return new CompositeShape(getPosition(), getWidth(), getHeight(), shapesList);
+        return new CompositeShape(getPosition().getX(),getPosition().getY(), getWidth(), getHeight(), shapesList, getStyle());
     }
 
     @Override
@@ -117,9 +104,12 @@ public class CompositeShape extends Shape implements Composite {
         return shapesList;
     }
 
+    /*
     @Override
     public void rotateTo(Point point) {
         for(Shape shape : shapesList) shape.rotateTo(point);
         super.rotateTo(point);
     }
+
+     */
 }

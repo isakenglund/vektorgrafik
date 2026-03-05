@@ -4,6 +4,7 @@ import main.ShapeApp;
 import main.ShapeContainer;
 import shapes.Point;
 import shapes.Shape;
+import shapes.style.Style;
 import states.State;
 
 public abstract class StateInsert extends State {
@@ -16,7 +17,7 @@ public abstract class StateInsert extends State {
     }
 
     // Abstrakt metod: Subklasserna tvingas definiera VILKEN figur som ritas
-    protected abstract Shape createShape(Point start, double width, double height);
+    protected abstract Shape createShape(Point start, double width, double height, Style style);
 
     @Override
     public void pointerDown(Point point) {
@@ -36,7 +37,8 @@ public abstract class StateInsert extends State {
             double height = point.getY() - startPoint.getY();
 
             // Här anropar vi den abstrakta metoden
-            tempShape = createShape(startPoint, width, height);
+            Style currentStyle = app.getCurrentStyle();
+            tempShape = createShape(startPoint, width, height, currentStyle);
 
             shapes.addShape(tempShape);
             shapes.repaint();
@@ -61,11 +63,14 @@ public abstract class StateInsert extends State {
             double width = point.getX() - startPoint.getX();
             double height = point.getY() - startPoint.getY();
 
-            shapes.addShape(createShape(startPoint, width, height));
+            Style currentStyle = app.getCurrentStyle();
+            shapes.addShape(createShape(startPoint, width, height, currentStyle));
         }
 
         startPoint = null;
         shapes.repaint();
     }
+
+
 }
 

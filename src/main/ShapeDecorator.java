@@ -5,20 +5,29 @@ import shapes.Shape;
 
 import java.awt.*;
 
-public abstract class ShapeDecorator extends Shape
+public class ShapeDecorator extends Shape
   {
   private final Shape decoratee;
 
   public ShapeDecorator(Shape decoratee)
     {
-      super(decoratee.getPosition(), decoratee.getWidth(), decoratee.getHeight());
+      super(decoratee.getPosition().getX(),decoratee.getPosition().getY(), decoratee.getWidth(), decoratee.getHeight(), decoratee.getStyle());
     this.decoratee = decoratee;
     }
-  @Override
-  public void draw(Graphics g)
+    @Override
+    public void draw(Graphics g)
     {
-    decoratee.draw(g);
-    g.setColor(Color.RED);
+      super.draw(g);
+      Point position = getPosition();
+      double width = getWidth();
+      double height = getHeight();
+
+      int x = (int)(width < 0 ? position.getX() + width - 1 : position.getX() - 1);
+      int y = (int)(height < 0 ? position.getY() + height - 1 : position.getY() - 1);
+      int w = (int)(Math.abs(width) + 2);
+      int h = (int)(Math.abs(height) + 2);
+
+      g.drawRect(x, y, w, h);
 
     }
   @Override

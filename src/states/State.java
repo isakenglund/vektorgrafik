@@ -3,7 +3,10 @@ package states;
 import main.Pointable;
 import main.ShapeApp;
 import shapes.Point;
+import shapes.style.StyleFactory;
 import states.shapes.StateInsertCircle;
+
+import java.awt.*;
 
 public abstract class State implements Pointable {
     private static State currentState;
@@ -14,9 +17,7 @@ public abstract class State implements Pointable {
         this.app = app;
     }
 
-    public State getState(){
-        return this;
-    }
+    public State getState(){return this;}
 
     public static void setState(State state){
         currentState = state;
@@ -32,8 +33,8 @@ public abstract class State implements Pointable {
 
     @Override
     public void pointerDown(Point point) {
-
     }
+
 
     @Override
     public void pointerUp(Point point) {

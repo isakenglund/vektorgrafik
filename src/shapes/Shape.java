@@ -1,38 +1,31 @@
 package shapes;
 
-import main.LineWidth;
+import shapes.style.Style;
 
 import java.awt.*;
 
-public abstract class Shape implements Cloneable
+public abstract class Shape
   {
 
     private Point topLeft;
     private double width, height;
     private boolean marked;
-    private double rotationRadians = 0.0;
-    private double currentRotationRadians = 0.0;
+    private Style style;
 
-    public Shape(double x, double y, double width, double height) {
+    public Shape(double x, double y, double width, double height, Style style) {
       this.topLeft = new Point(x,y);
       this.width = width;
       this.height = height;
       this.marked = false;
-    }
-    public Shape(Point p, double width, double height) {
-      this(p.getX(),p.getY(),width,height);
-      this.marked = false;
+      this.style = style;
     }
 
     public void draw(Graphics g) {
       Graphics2D g2 = (Graphics2D) g;
-      g2.setStroke(new BasicStroke(LineWidth.getInstance().getWidth()));
-    };
+      g2.setColor(style.getColor());
+      g2.setStroke(new BasicStroke(style.getLineWidth()));
+    }
 
-    public double getRotationRadians() { return rotationRadians; }
-
-    protected double centerX() { return topLeft.getX() + width / 2.0; }
-    protected double centerY() { return topLeft.getY() + height / 2.0; }
 
     public Point getPosition() {
       return this.topLeft;
@@ -74,21 +67,8 @@ public abstract class Shape implements Cloneable
     }
 
     public void resizeTo(Point point) {
-
-      double cx = centerX();
-      double cy = centerY();
-
-      double dx = point.getX() - cx;
-      double dy = point.getY() - cy;
-
-      double cos = Math.cos(currentRotationRadians);
-      double sin = Math.sin(currentRotationRadians);
-
-      double localX =  cos * dx + sin * dy;
-      double localY = -sin * dx + cos * dy;
-
-      this.width  = localX;
-      this.height = localY;
+      this.width = point.getX() - topLeft.getX();
+      this.height = point.getY() - topLeft.getY();;
     }
 
     public Shape peel() {
@@ -103,6 +83,11 @@ public abstract class Shape implements Cloneable
       return marked;
     }
 
+    public Style getStyle() {
+      return style;
+    }
+
+    /*
     public void rotateTo(Point point) {
       double dx = point.getX() - centerX();
       double dy = point.getY() - centerY();
@@ -110,21 +95,6 @@ public abstract class Shape implements Cloneable
       rotationRadians = Math.atan2(dy, dx); // radianer
       this.currentRotationRadians = rotationRadians;
     }
+    */
 
-      @Override
-      public Shape clone() {
-          try {
-              Shape clone = (Shape) super.clone();
-              clone.topLeft = new Point(topLeft);
-              clone.width = width;
-              clone.height = height;
-              clone.marked = marked;
-              clone.rotationRadians = rotationRadians;
-              clone.currentRotationRadians = currentRotationRadians;
-              // TODO: copy mutable state here, so the clone can't change the internals of the original
-              return clone;
-          } catch (CloneNotSupportedException e) {
-              throw new AssertionError();
-          }
-      }
   }

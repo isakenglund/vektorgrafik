@@ -18,7 +18,6 @@ public class StateRotate extends State{
     @Override
     public void pointerMoved(Point point, boolean pointerDown) {
         if(app.getShapeContainer().getSelected() != null && pointerDown) {
-            app.getShapeContainer().getSelected().rotateTo(point);
             app.getShapeContainer().repaint();
         }
     }

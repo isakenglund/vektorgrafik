@@ -1,13 +1,13 @@
 package main;
 
-import shapes.Shape;
+import shapes.style.Style;
+import shapes.style.StyleFactory;
 import states.*;
 import states.shapes.*;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.List;
-import java.util.LinkedList;
+
 
 import javax.swing.*;
 
@@ -15,6 +15,8 @@ public class ShapeApp extends JFrame
 {
   private static final long serialVersionUID = 1L;
   private ShapeContainer shapeContainer = new ShapeContainer();
+  private int lineWidth = 1;
+  private Color color = Color.BLACK;
 
   public ShapeApp()
   {
@@ -56,16 +58,18 @@ public class ShapeApp extends JFrame
     createPanelButton(shapes, "C", e -> State.setState(new StateInsertCircle(this)));
     createPanelButton(shapes, "R", e -> State.setState(new StateInsertRectangle(this)));
     createPanelButton(shapes, "L", e -> State.setState(new StateInsertLine(this)));
-    createPanelButton(shapes, "T", e -> State.setState(new StateInsertTriangle((this))));
-    createPanelButton(shapes, "P", e -> State.setState(new StateInsertPentagon((this))));
+    createPanelButton(shapes, "T", e -> State.setState(new StateInsertTriangle(this)));
+    createPanelButton(shapes, "P", e -> State.setState(new StateInsertPentagon(this)));
+
+
 
     createPanelButton(steps, "<<", e -> State.setState(new StateMove(this)));
     createPanelButton(steps, ">>", e -> State.setState(new StateMove(this)));
 
-    createPanelButton(objectTools, "Red", e -> State.setState(new StateMark(this)));
-    createPanelButton(objectTools, "Blue", e -> State.setState(new StateMark(this)));
-    createPanelButton(objectTools, "-", e -> LineWidth.getInstance().setWidth(LineWidth.getInstance().getWidth() - 1));
-    createPanelButton(objectTools, "+", e -> LineWidth.getInstance().setWidth(LineWidth.getInstance().getWidth()+1));
+    createPanelButton(objectTools, "Red", e -> {this.color = Color.RED;});
+    createPanelButton(objectTools, "Blue", e -> {this.color = Color.BLUE;});
+    createPanelButton(objectTools, "-", e -> this.lineWidth = Math.max(1, this.lineWidth - 1));
+    createPanelButton(objectTools, "+", e -> this.lineWidth += 1);
 
     toolbox.add(manipulate,BorderLayout.WEST);
     toolbox.add(shapes, BorderLayout.CENTER);
@@ -91,8 +95,14 @@ public class ShapeApp extends JFrame
     return shapeContainer;
   }
 
+  public Style getCurrentStyle() {
+    return StyleFactory.getInstance().getStyle(color, lineWidth);
+  }
+
   public static void main(String args[])
   {
     new ShapeApp(); // obs egentligen SwingUtilities ...
   }
+
+
 }
