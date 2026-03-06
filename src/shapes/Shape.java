@@ -11,6 +11,7 @@ public abstract class Shape
     private double width, height;
     private boolean marked;
     private Style style;
+    private Graphics2D g2;
 
     public Shape(Point p, double width, double height, Style style) {
       this.center = new Point(p.getX()+width/2, p.getY()+height/2);
@@ -88,6 +89,10 @@ public abstract class Shape
 
     public Style getStyle() {
       return style;
+    }
+
+    public void setStyle(Style style) {
+      this.style = style;
     }
 
     /*

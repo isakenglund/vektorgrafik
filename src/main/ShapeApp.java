@@ -15,6 +15,7 @@ public class ShapeApp extends JFrame
 {
   private static final long serialVersionUID = 1L;
   private ShapeContainer shapeContainer = new ShapeContainer();
+  private ShapeController shapeController = new ShapeController();
   private int lineWidth = 1;
   private Color color = Color.BLACK;
 
@@ -63,12 +64,11 @@ public class ShapeApp extends JFrame
     createPanelButton(shapes, "T", e -> State.setState(new StateInsertTriangle(this)));
     createPanelButton(shapes, "P", e -> State.setState(new StateInsertPentagon(this)));
 
-
-
     createPanelButton(steps, "<<", e -> State.setState(new StateMove(this)));
     createPanelButton(steps, ">>", e -> State.setState(new StateMove(this)));
 
-    createPanelButton(objectTools, "Red", e -> {this.color = Color.RED;});
+    createPanelButton(objectTools, "Red", e -> {this.color = Color.RED;
+    shapeController.updateShapes(this);});
     createPanelButton(objectTools, "Blue", e -> {this.color = Color.BLUE;});
     createPanelButton(objectTools, "-", e -> this.lineWidth = Math.max(1, this.lineWidth - 1));
     createPanelButton(objectTools, "+", e -> this.lineWidth += 1);

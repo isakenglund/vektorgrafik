@@ -21,7 +21,6 @@ public class ShapeDecorator extends Shape
       int pX = (int) getPosition().getX();
       int pY = (int) getPosition().getY();
 
-
       decoratee.draw(g);
       g.setColor(Color.RED);
       g.drawLine(pX - 5, pY - 5, pX + 5, pY + 5);

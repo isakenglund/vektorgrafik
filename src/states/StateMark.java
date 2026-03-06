@@ -10,12 +10,15 @@ import shapes.Shape;
 import shapes.style.StyleFactory;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StateMark extends State{
     private Point pointDown;
     private Point startPoint;
     private Shape tempShape;
+    private List<Shape> shapesOnCanvas;
+
 
     public StateMark(ShapeApp app){
         super(app);
@@ -25,6 +28,7 @@ public class StateMark extends State{
     public void pointerDown(Point point) {
         this.pointDown=point;
         this.startPoint = point;
+        shapesOnCanvas = app.getShapeContainer().getShapes();
     }
 
     @Override
@@ -52,17 +56,38 @@ public class StateMark extends State{
         // skapa en ny compositeShape
         // ta bort shapes som sätts in i compositeshape
         app.getShapeContainer().removeShape(tempShape);
+        List<Shape> shapesInMerge = mergeShapes(shapesOnCanvas,pointDown,point);
 
-        double x = Math.min(pointDown.getX(), point.getX());
-        double y = Math.min(pointDown.getY(), point.getY());
-        double width = Math.abs(pointDown.getX() - point.getX());
-        double height = Math.abs(pointDown.getY() - point.getY());
-
+        for(Shape shape: shapesInMerge) {
+            shape.setMarked(true);
+            shapesOnCanvas.add(new ShapeDecorator(shape));
+        }
         app.getShapeContainer().repaint();
     }
 
     private Shape createShape(Point start, double width, double height) {
         return new Rectangle(start, width, height, StyleFactory.getInstance().getStyle(Color.BLACK, 1));
+    }
+
+    private List<Shape> mergeShapes(List<Shape> list, Point pointDown, Point pointUp) {
+
+        List<Shape> shapesInMerge = new ArrayList<>();
+
+        list.forEach(shape -> {
+            if(shape.getPosition().getX()>pointDown.getX()&&
+                    shape.getPosition().getX()<pointUp.getX()&&
+                    shape.getPosition().getY()>pointDown.getY()&&
+                    shape.getPosition().getY()<pointUp.getY()
+            )
+            {
+                shapesInMerge.add(shape);
+            }
+        });
+
+
+        app.getShapeContainer().getShapes().removeAll(shapesInMerge);
+
+        return shapesInMerge;
     }
 
 
