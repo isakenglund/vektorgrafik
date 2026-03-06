@@ -20,7 +20,6 @@ public class StyleFactory {
     }
 
     public Style getStyle(Color color, int thickness) {
-        System.out.println( "Creating style: " + color + " " + thickness);
         String key = color + "-" + thickness;
 
         if (styles.containsKey(key)) {
