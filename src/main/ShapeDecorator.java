@@ -18,13 +18,16 @@ public class ShapeDecorator extends Shape
     public void draw(Graphics g)
     {
       super.draw(g);
-      Point position = getPosition();
-      double width = getWidth();
-      double height = getHeight();
+      int pX = (int) getPosition().getX();
+      int pY = (int) getPosition().getY();
 
-      g.drawLine((int) (position.getX()-2), (int) (position.getY()-2), (int) (position.getX()+2), (int) (position.getY()+2));
 
+      decoratee.draw(g);
+      g.setColor(Color.RED);
+      g.drawLine(pX - 5, pY - 5, pX + 5, pY + 5);
+      g.drawLine(pX + 5, pY - 5, pX - 5, pY + 5);
     }
+
   @Override
   public Point getPosition()
     {
