@@ -14,6 +14,6 @@ public class StateInsertCircle extends StateInsert {
 
     @Override
     protected Shape createShape(Point start, double width, double height, Style style) {
-        return new Circle(start.getX(),start.getY(), width, height, style);
+        return new Circle(start, width, height, style);
     }
 }

@@ -5,19 +5,23 @@ import shapes.style.Style;
 
 public class Rectangle extends Shape {
 
-    public Rectangle(double x, double y, double width, double height, Style style) {
-        super(x,y,width,height, style);
+    public Rectangle(Point p, double width, double height, Style style) {
+        super(p,width,height, style);
     }
 
     @Override
     public void draw(Graphics g) {
         super.draw(g);
 
-        int drawX = (int) (getWidth() < 0 ? getPosition().getX() + getWidth() : getPosition().getX());
-        int drawY = (int) (getHeight() < 0 ? getPosition().getY() + getHeight() : getPosition().getY());
-        int drawWidth  = (int) Math.abs(getWidth());
-        int drawHeight = (int) Math.abs(getHeight());
 
-        g.drawRect(drawX, drawY, drawWidth, drawHeight);
+        int rX = (int) (getPosition().getX() + getWidth()/2);
+        int lX = (int) (getPosition().getX() - getWidth()/2);
+
+        int tY = (int) (getPosition().getY() - getHeight()/2);
+        int bY = (int) (getPosition().getY() + getHeight()/2);
+
+        g.drawPolygon(new int[]{lX, lX, rX,rX}, new int[]{tY,bY,bY,tY}, 4);
+
+        //g.drawRect((int) (getPosition().getX()-getWidth()/2), (int) (getPosition().getY()-getHeight()/2), (int) getWidth(), (int) getHeight());
     }
 }

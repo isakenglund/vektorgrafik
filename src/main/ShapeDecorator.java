@@ -11,7 +11,7 @@ public class ShapeDecorator extends Shape
 
   public ShapeDecorator(Shape decoratee)
     {
-      super(decoratee.getPosition().getX(),decoratee.getPosition().getY(), decoratee.getWidth(), decoratee.getHeight(), decoratee.getStyle());
+      super(decoratee.getPosition(), decoratee.getWidth(), decoratee.getHeight(), decoratee.getStyle());
     this.decoratee = decoratee;
     }
     @Override
@@ -22,12 +22,7 @@ public class ShapeDecorator extends Shape
       double width = getWidth();
       double height = getHeight();
 
-      int x = (int)(width < 0 ? position.getX() + width - 1 : position.getX() - 1);
-      int y = (int)(height < 0 ? position.getY() + height - 1 : position.getY() - 1);
-      int w = (int)(Math.abs(width) + 2);
-      int h = (int)(Math.abs(height) + 2);
-
-      g.drawRect(x, y, w, h);
+      g.drawLine((int) (position.getX()-2), (int) (position.getY()-2), (int) (position.getX()+2), (int) (position.getY()+2));
 
     }
   @Override

@@ -7,13 +7,13 @@ import java.awt.*;
 public abstract class Shape
   {
 
-    private Point topLeft;
+    private Point center;
     private double width, height;
     private boolean marked;
     private Style style;
 
-    public Shape(double x, double y, double width, double height, Style style) {
-      this.topLeft = new Point(x,y);
+    public Shape(Point p, double width, double height, Style style) {
+      this.center = new Point(p.getX()+width/2, p.getY()+height/2);
       this.width = width;
       this.height = height;
       this.marked = false;
@@ -28,7 +28,7 @@ public abstract class Shape
 
 
     public Point getPosition() {
-      return this.topLeft;
+      return this.center;
     }
 
     public double getWidth() {
@@ -48,27 +48,30 @@ public abstract class Shape
     }
 
     public boolean intersects(Point point) {
-      double minX = Math.min(topLeft.getX(), topLeft.getX() + width);
-      double maxX = Math.max(topLeft.getX(), topLeft.getX() + width);
+      double halfWidth = Math.abs(width) / 2.0;
+      double halfHeight = Math.abs(height) / 2.0;
 
-      double minY = Math.min(topLeft.getY(), topLeft.getY() + height);
-      double maxY = Math.max(topLeft.getY(), topLeft.getY() + height);
+      double minX = center.getX() - halfWidth;
+      double maxX = center.getX() + halfWidth;
+
+      double minY = center.getY() - halfHeight;
+      double maxY = center.getY() + halfHeight;
 
       return point.getX() >= minX && point.getX() <= maxX &&
               point.getY() >= minY && point.getY() <= maxY;
     }
 
     public void moveTo(Point point) {
-      topLeft.moveTo(point);
+      center.moveTo(point);
     }
 
     public void move(double dx, double dy) {
-      topLeft.move(dx, dy);
+      center.move(dx, dy);
     }
 
     public void resizeTo(Point point) {
-      this.width = point.getX() - topLeft.getX();
-      this.height = point.getY() - topLeft.getY();;
+      this.width = (point.getX() - center.getX())*2;
+      this.height = (point.getY() - center.getY())*2;;
     }
 
     public Shape peel() {

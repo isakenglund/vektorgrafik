@@ -6,22 +6,21 @@ import java.awt.*;
 
 public class Triangle extends Shape {
 
-    public Triangle(double x, double y, double width, double height, Style style) {
-        super(x, y, width, height, style);
+    public Triangle(Point p, double width, double height, Style style) {
+        super(p, width, height, style);
     }
 
     @Override
     public void draw(Graphics g) {
         super.draw(g);
 
-        int rightX = (int) (getPosition().getX() + getWidth());
-        int middleX = (int) (getPosition().getX() + getWidth() / 2);
-        int leftX = (int) (getPosition().getX());
+        int rightX = (int) (getPosition().getX() + getWidth()/2);
+        int middleX = (int) (getPosition().getX());
+        int leftX = (int) (getPosition().getX()- getWidth()/2);
 
-        int topY = (int) (getPosition().getY());
-        int bottomY = (int) (getPosition().getY() + getHeight());
+        int topY = (int) (getPosition().getY() - getHeight()/2);
+        int bottomY = (int) (getPosition().getY() + getHeight()/2);
 
-        g.drawPolygon(new int[]{leftX, middleX, rightX},
-                new int[]{bottomY, topY, bottomY}, 3);
+        g.drawPolygon(new int[]{leftX, middleX, rightX}, new int[]{bottomY, topY, bottomY}, 3);
     }
 }

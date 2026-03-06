@@ -16,7 +16,6 @@ public abstract class StateInsert extends State {
         super(app);
     }
 
-    // Abstrakt metod: Subklasserna tvingas definiera VILKEN figur som ritas
     protected abstract Shape createShape(Point start, double width, double height, Style style);
 
     @Override
@@ -36,7 +35,6 @@ public abstract class StateInsert extends State {
             double width = point.getX() - startPoint.getX();
             double height = point.getY() - startPoint.getY();
 
-            // Här anropar vi den abstrakta metoden
             Style currentStyle = app.getCurrentStyle();
             tempShape = createShape(startPoint, width, height, currentStyle);
 
@@ -47,18 +45,15 @@ public abstract class StateInsert extends State {
 
     @Override
     public void pointerUp(Point point) {
-        // Kör logiken från State-klassen först (avmarkerar eventuella valda figurer)
+
         super.pointerUp(point);
 
         ShapeContainer shapes = app.getShapeContainer();
 
-        // Rensa preview-figuren
         if (tempShape != null) {
             shapes.removeShape(tempShape);
             tempShape = null;
         }
-
-        // Skapa den slutgiltiga figuren
         if (startPoint != null) {
             double width = point.getX() - startPoint.getX();
             double height = point.getY() - startPoint.getY();

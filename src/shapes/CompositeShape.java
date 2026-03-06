@@ -9,9 +9,9 @@ public class CompositeShape extends Shape implements Composite {
 
     private List<Shape> shapesList;
 
-    public CompositeShape(double x, double y, double width, double height, List<Shape> shapesList, Style style)
+    public CompositeShape(Point p, double width, double height, List<Shape> shapesList, Style style)
     {
-        super(x,y,width,height, style);
+        super(p,width,height, style);
         this.shapesList = shapesList;
     }
 
@@ -96,7 +96,7 @@ public class CompositeShape extends Shape implements Composite {
     }
     public Shape peel()
     {
-        return new CompositeShape(getPosition().getX(),getPosition().getY(), getWidth(), getHeight(), shapesList, getStyle());
+        return new CompositeShape(getPosition(), getWidth(), getHeight(), shapesList, getStyle());
     }
 
     @Override

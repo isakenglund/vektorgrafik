@@ -67,12 +67,12 @@ public class StateMerge extends State {
         double width = Math.abs(pointDown.getX() - point.getX());
         double height = Math.abs(pointDown.getY() - point.getY());
 
-        app.getShapeContainer().addShape(new CompositeShape(x, y, width, height, shapesInMerge, StyleFactory.getInstance().getStyle(Color.BLACK, 1)));
+        app.getShapeContainer().addShape(new CompositeShape(new Point(x,y), width, height, shapesInMerge, StyleFactory.getInstance().getStyle(Color.BLACK, 1)));
         app.getShapeContainer().repaint();
     }
 
     private Shape createShape(Point start, double width, double height) {
-        return new Rectangle(start.getX(),start.getY(), width, height, StyleFactory.getInstance().getStyle(Color.BLACK, 1));
+        return new Rectangle(start, width, height, StyleFactory.getInstance().getStyle(Color.BLACK, 1));
     }
 
     private List<Shape> mergeShapes(List<Shape> list, Point pointDown, Point pointUp) {

@@ -13,6 +13,6 @@ public class StateInsertRectangle extends StateInsert{
 
     @Override
     protected Shape createShape(Point start, double width, double height, Style style) {
-        return new Rectangle(start.getX(),start.getY(), width, height, style);
+        return new Rectangle(start, width, height, style);
     }
 }
