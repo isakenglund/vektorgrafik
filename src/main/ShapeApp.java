@@ -41,8 +41,20 @@ public class ShapeApp extends JFrame
     createMenuItem(menu, "Merge", e -> State.setState(new StateMerge(this)));
     createMenuItem(menu, "Unmerge", e -> State.setState(new StateUnmerge(this)));
 
+    JMenu addMenu = new JMenu("Add");
+    JMenu customShapes = new JMenu("Custom Shapes");
+
+    createMenuItem(addMenu, "Add marked shapes to custom tool", e ->     createMenuItem(customShapes, "Circle", f -> {
+      State.setState(new StateInsertCircle(this));
+    } ));
+    createMenuItem(addMenu, "Remove marked shapes to custom tool", e -> customShapes.removeAll());
+
+
+
     JMenuBar menuBar = new JMenuBar();
     menuBar.add(menu);
+    menuBar.add(addMenu);
+    menuBar.add(customShapes);
     this.setJMenuBar(menuBar);
   }
 
