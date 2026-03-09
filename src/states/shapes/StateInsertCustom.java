@@ -17,5 +17,8 @@ public class StateInsertCustom extends StateInsert {
     @Override
     protected Shape createShape(Point start, double width, double height, Style style) {
         return new Rectangle(start, width, height, style);
+        // hämta alla figurer i markeringen
+        // skapa en komposit figur av objekten
+        // returnera kopia av figuren med prototypemönstret
     }
 }
