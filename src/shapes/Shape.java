@@ -1,12 +1,12 @@
 package shapes;
 
 import shapes.style.Style;
+import visitor.ShapeVisitor;
 
 import java.awt.*;
 
 public abstract class Shape
   {
-
     private Point center;
     private double width, height;
     private boolean marked;
@@ -93,6 +93,10 @@ public abstract class Shape
 
     public void setStyle(Style style) {
       this.style = style;
+    }
+
+    public void accept(ShapeVisitor visitor){
+      visitor.visit(this);
     }
 
     /*

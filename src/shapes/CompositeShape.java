@@ -1,6 +1,7 @@
 package shapes;
 
 import shapes.style.Style;
+import visitor.ShapeVisitor;
 
 import java.awt.*;
 import java.util.List;
@@ -31,6 +32,8 @@ public class CompositeShape extends Shape implements Composite {
         shapesList.forEach(shape -> {
             shape.draw(g);
         });
+
+        System.out.println(shapesList.size());
 
     }
 
@@ -102,6 +105,17 @@ public class CompositeShape extends Shape implements Composite {
     @Override
     public List<Shape> getChildren() {
         return shapesList;
+    }
+
+    @Override
+    public boolean intersects(Point point) {
+        System.out.println("running intersect");
+        return shapesList.stream().anyMatch(shape -> shape.intersects(point));
+    }
+
+    @Override
+    public void accept(ShapeVisitor visitor){
+        shapesList.forEach(shape -> shape.accept(visitor));
     }
 
     /*

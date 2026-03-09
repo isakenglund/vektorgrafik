@@ -17,14 +17,19 @@ public class ShapeDecorator extends Shape
     @Override
     public void draw(Graphics g)
     {
-      super.draw(g);
+      Graphics2D g2 = (Graphics2D) g;
       int pX = (int) getPosition().getX();
       int pY = (int) getPosition().getY();
+      final int markSize = 5;
 
+      //marker
+      g2.setColor(Color.RED);
+      g2.setStroke(new BasicStroke());
+      g2.drawLine(pX - markSize, pY - markSize, pX + markSize, pY + markSize);
+      g2.drawLine(pX + markSize, pY - markSize, pX - markSize, pY + markSize);
+
+      super.draw(g);
       decoratee.draw(g);
-      g.setColor(Color.RED);
-      g.drawLine(pX - 5, pY - 5, pX + 5, pY + 5);
-      g.drawLine(pX + 5, pY - 5, pX - 5, pY + 5);
     }
 
   @Override

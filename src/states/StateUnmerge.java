@@ -24,7 +24,7 @@ public class StateUnmerge extends State {
         {
             List<Shape> unmergeShape = ((Composite) selected).getChildren();
             for(Shape shape: unmergeShape) {
-                shapeContainer.addShape(shape);
+                shapeContainer.addShape(shape.peel());
             }
             shapeContainer.removeShape(selected);
             app.getShapeContainer().repaint();
