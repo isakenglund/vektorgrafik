@@ -1,5 +1,6 @@
 package main;
 
+import shapes.CompositeShape;
 import shapes.Point;
 import shapes.Shape;
 

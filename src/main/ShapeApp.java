@@ -82,11 +82,10 @@ public class ShapeApp extends JFrame
     createPanelButton(steps, "<<", e -> State.setState(new StateMove(this)));
     createPanelButton(steps, ">>", e -> State.setState(new StateMove(this)));
 
-    createPanelButton(objectTools, "Red", e -> {this.color = Color.RED;
-    shapeController.updateShapes(this);});
-    createPanelButton(objectTools, "Blue", e -> {this.color = Color.BLUE;});
-    createPanelButton(objectTools, "-", e -> this.lineWidth = Math.max(1, this.lineWidth - 1));
-    createPanelButton(objectTools, "+", e -> this.lineWidth += 1);
+    createPanelButton(objectTools, "Red", e -> {this.color = Color.RED; shapeController.updateShapes(this);});
+    createPanelButton(objectTools, "Blue", e -> {this.color = Color.BLUE; shapeController.updateShapes(this);});
+    createPanelButton(objectTools, "-", e -> {this.lineWidth = Math.max(1, this.lineWidth - 1); shapeController.updateShapes((this));});
+    createPanelButton(objectTools, "+", e ->{this.lineWidth += 1; shapeController.updateShapes((this));});
 
     toolbox.add(manipulate,BorderLayout.WEST);
     toolbox.add(shapes, BorderLayout.CENTER);

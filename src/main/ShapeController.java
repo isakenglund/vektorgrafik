@@ -10,8 +10,6 @@ public class ShapeController {
 
             if(actualShape.isMarked()) {
                 actualShape.setStyle(shapeApp.getCurrentStyle());
-                System.out.println(actualShape.getStyle().getColor());
-                System.out.println("Shape marked");
             }
         }
         shapeApp.getShapeContainer().repaint();

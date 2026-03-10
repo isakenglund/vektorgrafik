@@ -1,6 +1,7 @@
 package states;
 
 import main.ShapeContainer;
+import main.ShapeDecorator;
 import shapes.CompositeShape;
 import shapes.Point;
 import main.ShapeApp;
@@ -39,9 +40,7 @@ public class StateMerge extends State {
         if (pointerDown && startPoint != null) {
             ShapeContainer shapes = app.getShapeContainer();
 
-            if (tempShape != null) {
-                shapes.removeShape(tempShape);
-            }
+            if (tempShape != null) {shapes.removeShape(tempShape);}
 
             double width = point.getX() - startPoint.getX();
             double height = point.getY() - startPoint.getY();
@@ -67,7 +66,7 @@ public class StateMerge extends State {
         double width = Math.abs(pointDown.getX() - point.getX());
         double height = Math.abs(pointDown.getY() - point.getY());
 
-        app.getShapeContainer().addShape(new CompositeShape(new Point(x,y), width, height, shapesInMerge, StyleFactory.getInstance().getStyle(Color.BLACK, 1)));
+        app.getShapeContainer().addShape(new CompositeShape(new Point(x-width/2,y-height/2), width, height, shapesInMerge, StyleFactory.getInstance().getStyle(Color.BLACK, 1)));
         app.getShapeContainer().repaint();
     }
 
@@ -78,6 +77,7 @@ public class StateMerge extends State {
     private List<Shape> mergeShapes(List<Shape> list, Point pointDown, Point pointUp) {
 
         List<Shape> shapesInMerge = new ArrayList<>();
+        List<Shape> shapesToRemove = new ArrayList<>();
 
         list.forEach(shape -> {
             if(shape.getPosition().getX()>pointDown.getX()&&
@@ -86,11 +86,12 @@ public class StateMerge extends State {
                     shape.getPosition().getY()<pointUp.getY()
             )
             {
-                shapesInMerge.add(shape);
+                shapesInMerge.add(new ShapeDecorator(shape));
+                shapesToRemove.add(shape);
             }
         });
 
-        app.getShapeContainer().getShapes().removeAll(shapesInMerge);
+        app.getShapeContainer().getShapes().removeAll(shapesToRemove);
 
         return shapesInMerge;
     }
