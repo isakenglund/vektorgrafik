@@ -11,24 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StateInsertCustom extends StateInsert {
-    Shape selected;
+    List<Shape> selected;
 
-    public StateInsertCustom(ShapeApp app, Shape selected) {
+    public StateInsertCustom(ShapeApp app, List<Shape> selected) {
         super(app);
         this.selected = selected;
     }
 
     @Override
     protected Shape createShape(Point start, double width, double height, Style style) {
-        List<Shape> markedShapes = new ArrayList<>();
-
-        for(Shape shape:app.getShapeContainer().getShapes()) {
-            if(shape.isMarked()){
-                markedShapes.add(shape);
-            }
-        }
-
-        return new CompositeShape(start,width,height,markedShapes,style).clone();
+        return new CompositeShape(start,width,height,selected,style);
 
         // hämta alla figurer i markeringen
         // skapa en komposit figur av objekten

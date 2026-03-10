@@ -44,11 +44,13 @@ public class ShapeApp extends JFrame
     JMenu addMenu = new JMenu("Add");
     JMenu customShapes = new JMenu("Custom Shapes");
 
-    createMenuItem(addMenu, "Add marked shapes to custom tool", e ->
-            createMenuItem(customShapes, "Custom shape", f -> {
-              System.out.println(shapeContainer.getSelected());
-      State.setState(new StateInsertCustom(this, shapeContainer.getSelected()));
-    } ));
+    createMenuItem(addMenu, "Add marked shapes to custom tool", e -> {
+      createMenuItem(customShapes, "Custom shape", f -> {
+        State.setState(new StateInsertCustom(this, shapeContainer.getIsMarked()));
+      });
+      System.out.println(State.getCurrentState());
+    });
+
 
     createMenuItem(addMenu, "Remove marked shapes to custom tool", e -> customShapes.removeAll());
 

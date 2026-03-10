@@ -80,4 +80,7 @@ public class ShapeContainer extends JPanel implements Pointable
 
   public void pointerMoved(Point point, boolean pointerDown) {State.getCurrentState().pointerMoved(point, pointerDown);}
 
+    public List<Shape> getIsMarked() {
+    return shapes.stream().filter(Shape::isMarked).toList();
+    }
   }

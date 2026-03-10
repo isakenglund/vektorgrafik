@@ -18,6 +18,8 @@ public class CompositeShape extends Shape implements Composite {
 
     public CompositeShape(CompositeShape compositeShape) {
         super(compositeShape);
+        this.shapesList = compositeShape.getChildren().stream().map(Shape::clone).toList();
+
     }
 
 
@@ -36,9 +38,6 @@ public class CompositeShape extends Shape implements Composite {
         shapesList.forEach(shape -> {
             shape.draw(g);
         });
-
-        System.out.println(shapesList.size());
-
     }
 
 
@@ -118,7 +117,6 @@ public class CompositeShape extends Shape implements Composite {
 
     @Override
     public boolean intersects(Point point) {
-        System.out.println("running intersect");
         return shapesList.stream().anyMatch(shape -> shape.intersects(point));
     }
 
