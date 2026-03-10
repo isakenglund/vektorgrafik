@@ -10,6 +10,10 @@ public class Line extends Shape {
         super(p, width, height, style);
     }
 
+    public Line(Line line) {
+        super(line);
+    }
+
     @Override
     public void draw(Graphics g) {
         super.draw(g);
@@ -19,5 +23,10 @@ public class Line extends Shape {
         int y2 = (int) (getPosition().getY()+ getHeight()/2 );
 
         g.drawLine(x1, y1, x2, y2);
+    }
+
+    @Override
+    public Shape clone() {
+        return new Line(this);
     }
 }

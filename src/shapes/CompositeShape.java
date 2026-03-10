@@ -15,6 +15,10 @@ public class CompositeShape extends Shape implements Composite {
         this.shapesList = shapesList;
     }
 
+    public CompositeShape(CompositeShape compositeShape) {
+        super(compositeShape);
+    }
+
 
     @Override
     public void draw(Graphics g)
@@ -97,6 +101,11 @@ public class CompositeShape extends Shape implements Composite {
     public Shape peel()
     {
         return new CompositeShape(getPosition(), getWidth(), getHeight(), shapesList, getStyle());
+    }
+
+    @Override
+    public Shape clone() {
+        return new CompositeShape(this);
     }
 
     @Override

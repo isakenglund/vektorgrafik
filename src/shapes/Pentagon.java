@@ -13,6 +13,10 @@ public class Pentagon extends Shape {
         this.yPoints = new int[5];
     }
 
+    public Pentagon(Pentagon pentagon) {
+        super(pentagon);
+    }
+
     @Override
     public void draw(Graphics g) {
         super.draw(g);
@@ -35,6 +39,11 @@ public class Pentagon extends Shape {
         }
 
         g.drawPolygon(xPoints, yPoints, 5);
+    }
+
+    @Override
+    public Shape clone() {
+        return new Pentagon(this);
     }
 
 }

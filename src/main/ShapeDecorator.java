@@ -14,6 +14,8 @@ public class ShapeDecorator extends Shape
       super(decoratee.getPosition(), decoratee.getWidth(), decoratee.getHeight(), decoratee.getStyle());
     this.decoratee = decoratee;
     }
+
+
     @Override
     public void draw(Graphics g)
     {
@@ -76,6 +78,11 @@ public class ShapeDecorator extends Shape
     @Override
     public boolean isMarked() {
       return decoratee.isMarked();
+    }
+
+    @Override
+    public Shape clone() {
+      return new ShapeDecorator(this);
     }
 
 

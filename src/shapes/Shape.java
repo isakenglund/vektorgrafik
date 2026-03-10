@@ -13,6 +13,14 @@ public abstract class Shape
     private Style style;
     private Graphics2D g2;
 
+    public Shape(Shape shape) {
+      this.center = new Point(shape.getPosition());
+      this.width = shape.getWidth();
+      this.height = shape.getHeight();
+      this.marked = shape.isMarked();
+      this.style = shape.getStyle();
+    }
+
     public Shape(Point p, double width, double height, Style style) {
       this.center = new Point(p.getX()+width/2, p.getY()+height/2);
       this.width = width;
@@ -94,6 +102,9 @@ public abstract class Shape
     public void setStyle(Style style) {
       this.style = style;
     }
+
+    public abstract Shape clone();
+
 
     /*
     public void rotateTo(Point point) {

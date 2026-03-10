@@ -9,6 +9,10 @@ public class Rectangle extends Shape {
         super(p,width,height, style);
     }
 
+    public Rectangle(Rectangle rectangle) {
+        super(rectangle);
+    }
+
     @Override
     public void draw(Graphics g) {
         super.draw(g);
@@ -23,5 +27,10 @@ public class Rectangle extends Shape {
         g.drawPolygon(new int[]{lX, lX, rX,rX}, new int[]{tY,bY,bY,tY}, 4);
 
         //g.drawRect((int) (getPosition().getX()-getWidth()/2), (int) (getPosition().getY()-getHeight()/2), (int) getWidth(), (int) getHeight());
+    }
+
+    @Override
+    public Shape clone() {
+        return new Rectangle(this);
     }
 }
