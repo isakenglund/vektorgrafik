@@ -21,6 +21,8 @@ public class ShapeApp extends JFrame
   private int lineWidth = 1;
   private Color color = Color.BLACK;
   private String customShapeName = null;
+  private String textName = null;
+
 
   public ShapeApp()
   {
@@ -58,11 +60,17 @@ public class ShapeApp extends JFrame
     });
     createMenuItem(addMenu, "Remove marked shapes to custom tool", e -> customShapes.removeAll());
 
+    JMenu text = new JMenu("Text");
+    createMenuItem(text,"Add text", e -> {
+      State.setState(new StateInsertText(this, JOptionPane.showInputDialog("Ange text:")));
+    });
+
     JMenuBar menuBar = new JMenuBar();
     menuBar.add(menu);
     menuBar.add(shapes);
     menuBar.add(addMenu);
     menuBar.add(customShapes);
+    menuBar.add(text);
     this.setJMenuBar(menuBar);
   }
 
@@ -93,7 +101,7 @@ public class ShapeApp extends JFrame
 
   private void createMenuItem(JMenu menu, String label, ActionListener listener)
   {
-    JRadioButtonMenuItem menuItem = new JRadioButtonMenuItem(label);
+    JRadioButton menuItem = new JRadioButton(label);
     menuItem.addActionListener(listener);
     menu.add(menuItem);
   }

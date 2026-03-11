@@ -39,6 +39,10 @@ public abstract class Shape
       return this.center;
     }
 
+    public void setPosition(Point point){
+        this.center = point;
+    }
+
     public double getWidth() {
       return this.width;
     }
