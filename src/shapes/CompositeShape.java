@@ -101,6 +101,11 @@ public class CompositeShape extends Shape implements Composite {
     }
 
     @Override
+    public String toCSV() {
+        return "";
+    }
+
+    @Override
     public List<Shape> getChildren() {
         return shapesList;
     }

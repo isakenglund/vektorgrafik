@@ -33,4 +33,9 @@ public class Triangle extends Shape {
     public Shape clone() {
         return new Triangle(this);
     }
+
+    @Override
+    public String toCSV() {
+        return "Triangle, " + getPosition().getX() + ", " + getPosition().getY() + ", " + getWidth() + ", " + getHeight() + ", " + getStyle().getColor() + "," + getStyle().getLineWidth();
+    }
 }

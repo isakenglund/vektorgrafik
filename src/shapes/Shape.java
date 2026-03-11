@@ -113,14 +113,6 @@ public abstract class Shape
       visitor.visit(this);
     }
 
-    /*
-    public void rotateTo(Point point) {
-      double dx = point.getX() - centerX();
-      double dy = point.getY() - centerY();
-
-      rotationRadians = Math.atan2(dy, dx); // radianer
-      this.currentRotationRadians = rotationRadians;
-    }
-    */
+    public abstract String toCSV();
 
   }

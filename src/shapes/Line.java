@@ -29,4 +29,9 @@ public class Line extends Shape {
     public Shape clone() {
         return new Line(this);
     }
+
+    @Override
+    public String toCSV() {
+        return "";
+    }
 }

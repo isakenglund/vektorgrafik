@@ -30,4 +30,9 @@ public class Text extends Shape {
     public Shape clone() {
         return new Text(this);
     }
+
+    @Override
+    public String toCSV() {
+        return "";
+    }
 }

@@ -33,4 +33,9 @@ public class Rectangle extends Shape {
     public Shape clone() {
         return new Rectangle(this);
     }
+
+    @Override
+    public String toCSV() {
+        return "";
+    }
 }

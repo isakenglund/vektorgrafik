@@ -27,4 +27,9 @@ public class Circle extends Shape {
   public Shape clone() {
     return new Circle(this);
   }
+
+  @Override
+  public String toCSV() {
+    return "";
+  }
 }

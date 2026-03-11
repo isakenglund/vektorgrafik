@@ -60,6 +60,10 @@ public class ShapeApp extends JFrame
     JMenu print = new JMenu("Print");
     shapeController.createMenuItem(print,"Print Canvas", e -> shapeController.printComponent(shapeContainer));
 
+    JMenu file = new JMenu("File");
+    shapeController.createMenuItem(file,"Export canvas", e -> shapeController.exportFile(shapeContainer));
+    shapeController.createMenuItem(file,"Import canvas", e -> shapeController.importFile(shapeContainer));
+
     JMenuBar menuBar = new JMenuBar();
     menuBar.add(menu);
     menuBar.add(shapes);
@@ -67,6 +71,7 @@ public class ShapeApp extends JFrame
     menuBar.add(customShapes);
     menuBar.add(text);
     menuBar.add(print);
+    menuBar.add(file);
     this.setJMenuBar(menuBar);
   }
 

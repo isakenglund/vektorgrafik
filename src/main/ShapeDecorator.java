@@ -90,5 +90,10 @@ public class ShapeDecorator extends Shape
       return new ShapeDecorator(this);
     }
 
+    @Override
+    public String toCSV() {
+      return "";
+    }
+
 
   }
