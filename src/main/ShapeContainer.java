@@ -11,6 +11,7 @@ import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 import javax.swing.JPanel;
 
@@ -22,6 +23,8 @@ public class ShapeContainer extends JPanel implements Pointable, Printable
   private List<Shape>       shapes           = new LinkedList<>();
   private Shape selected;
 
+  private final Stack<List<Shape>> undoStack = new Stack<>();
+  private final Stack<List<Shape>> redoStack = new Stack<>();
 
   public ShapeContainer()
     {
@@ -32,13 +35,16 @@ public class ShapeContainer extends JPanel implements Pointable, Printable
     this.setBackground(Color.white);
     }
 
-  public void addShape(Shape shape)
-    {
-    shapes.add(shape);
+    public void addShape(Shape shape) {
+      saveState();
+      shapes.add(shape);
+      repaint();
     }
 
     public void removeShape(Shape shape) {
-    shapes.remove(shape);
+      saveState();
+      shapes.remove(shape);
+      repaint();
     }
 
     public void paintComponent(Graphics g) // anropas av Swing när det är dags att
@@ -92,4 +98,38 @@ public class ShapeContainer extends JPanel implements Pointable, Printable
       return 0;
     }
 
+    private List<Shape> deepCopyShapes(List<Shape> original) {
+      List<Shape> copy = new LinkedList<>();
+      for (Shape shape : original) {
+        copy.add(shape.clone());
+      }
+      return copy;
+    }
+
+    public void saveState() {
+      undoStack.push(deepCopyShapes(shapes));
+      redoStack.clear();
+    }
+
+    public void undo() {
+      if (!undoStack.isEmpty()) {
+        redoStack.push(deepCopyShapes(shapes));
+        shapes = undoStack.pop();
+        selected = null;
+        repaint();
+      } else {
+        System.out.println("Undo stack is empty");
+      }
+    }
+
+    public void redo() {
+      if (!redoStack.isEmpty()) {
+        undoStack.push(deepCopyShapes(shapes));
+        shapes = redoStack.pop();
+        selected = null;
+        repaint();
+      } else {
+        System.out.println("Redo stack is empty");
+      }
+    }
   }

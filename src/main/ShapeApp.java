@@ -1,11 +1,13 @@
 package main;
 
+import command.Command;
 import shapes.style.Style;
 import shapes.style.StyleFactory;
 import states.*;
 import states.shapes.*;
 
 import java.awt.*;
+import java.util.Stack;
 
 
 import javax.swing.*;
@@ -17,6 +19,9 @@ public class ShapeApp extends JFrame
   private ShapeController shapeController = new ShapeController();
   private int lineWidth = 1;
   private Color color = Color.BLACK;
+
+
+
 
 
   public ShapeApp()
@@ -76,8 +81,8 @@ public class ShapeApp extends JFrame
     JPanel steps = new JPanel();
     JPanel objectTools = new JPanel();
 
-    shapeController.createPanelButton(steps, "<<", e -> State.setState(new StateMove(this)));
-    shapeController.createPanelButton(steps, ">>", e -> State.setState(new StateMove(this)));
+    shapeController.createPanelButton(steps, "<<", e -> shapeContainer.undo());
+    shapeController.createPanelButton(steps, ">>", e -> shapeContainer.redo());
 
     shapeController.createPanelButton(objectTools, "Red", e -> {this.color = Color.RED; shapeController.updateShapes(this);});
     shapeController.createPanelButton(objectTools, "Blue", e -> {this.color = Color.BLUE; shapeController.updateShapes(this);});

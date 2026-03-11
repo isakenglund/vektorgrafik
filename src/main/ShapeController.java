@@ -40,7 +40,7 @@ public class ShapeController {
 
     public void printComponent(Component component) {
         PrinterJob pj = PrinterJob.getPrinterJob();
-        pj.setJobName("Print Component");
+        pj.setJobName("Print Canvas");
 
         pj.setPrintable((pg, pf, pageNum) -> {
 
