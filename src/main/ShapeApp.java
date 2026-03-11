@@ -42,6 +42,13 @@ public class ShapeApp extends JFrame
     createMenuItem(menu, "Unmark", e -> State.setState(new StateUnmark(this)));
     createMenuItem(menu, "Resize", e -> State.setState(new StateResize(this)));
 
+    JMenu shapes = new JMenu("Shapes");
+    createMenuItem(shapes, "Circle", e -> State.setState(new StateInsertCircle(this)));
+    createMenuItem(shapes, "Rectangle", e -> State.setState(new StateInsertRectangle(this)));
+    createMenuItem(shapes, "Line", e -> State.setState(new StateInsertLine(this)));
+    createMenuItem(shapes, "Triangle", e -> State.setState(new StateInsertTriangle(this)));
+    createMenuItem(shapes, "Pentagon", e -> State.setState(new StateInsertPentagon(this)));
+
     JMenu addMenu = new JMenu("Add");
     JMenu customShapes = new JMenu("Custom Shapes");
 
@@ -53,6 +60,7 @@ public class ShapeApp extends JFrame
 
     JMenuBar menuBar = new JMenuBar();
     menuBar.add(menu);
+    menuBar.add(shapes);
     menuBar.add(addMenu);
     menuBar.add(customShapes);
     this.setJMenuBar(menuBar);
@@ -60,21 +68,9 @@ public class ShapeApp extends JFrame
 
   private void createToolbox() {
     JPanel toolbox = new JPanel();
-    JPanel shapes = new JPanel();
+    JMenu shapes = new JMenu("Shapes");
     JPanel steps = new JPanel();
-    JPanel manipulate = new JPanel();
     JPanel objectTools = new JPanel();
-
-    createPanelButton(manipulate, "Mv", e -> State.setState(new StateMove(this)));
-    createPanelButton(manipulate, "Rz", e -> State.setState(new StateResize(this)));
-    createPanelButton(manipulate, "Ro", e -> State.setState(new StateRotate(this)));
-    createPanelButton(manipulate, "Del", e -> State.setState(new StateDelete(this)));
-
-    createPanelButton(shapes, "C", e -> State.setState(new StateInsertCircle(this)));
-    createPanelButton(shapes, "R", e -> State.setState(new StateInsertRectangle(this)));
-    createPanelButton(shapes, "L", e -> State.setState(new StateInsertLine(this)));
-    createPanelButton(shapes, "T", e -> State.setState(new StateInsertTriangle(this)));
-    createPanelButton(shapes, "P", e -> State.setState(new StateInsertPentagon(this)));
 
     createPanelButton(steps, "<<", e -> State.setState(new StateMove(this)));
     createPanelButton(steps, ">>", e -> State.setState(new StateMove(this)));
@@ -84,8 +80,6 @@ public class ShapeApp extends JFrame
     createPanelButton(objectTools, "-", e -> {this.lineWidth = Math.max(1, this.lineWidth - 1); shapeController.updateShapes((this));});
     createPanelButton(objectTools, "+", e ->{this.lineWidth += 1; shapeController.updateShapes((this));});
 
-    toolbox.add(manipulate,BorderLayout.WEST);
-    toolbox.add(shapes, BorderLayout.CENTER);
     toolbox.add(steps, BorderLayout.EAST);
     toolbox.add(objectTools, BorderLayout.EAST);
     this.add(toolbox, BorderLayout.SOUTH);
@@ -99,7 +93,7 @@ public class ShapeApp extends JFrame
 
   private void createMenuItem(JMenu menu, String label, ActionListener listener)
   {
-    JMenuItem menuItem = new JMenuItem(label);
+    JRadioButtonMenuItem menuItem = new JRadioButtonMenuItem(label);
     menuItem.addActionListener(listener);
     menu.add(menuItem);
   }
