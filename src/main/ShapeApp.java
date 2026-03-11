@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+
 public class ShapeApp extends JFrame
 {
   private static final long serialVersionUID = 1L;
@@ -18,6 +20,7 @@ public class ShapeApp extends JFrame
   private ShapeController shapeController = new ShapeController();
   private int lineWidth = 1;
   private Color color = Color.BLACK;
+  private String customShapeName = null;
 
   public ShapeApp()
   {
@@ -38,23 +41,15 @@ public class ShapeApp extends JFrame
     createMenuItem(menu, "Mark", e -> State.setState(new StateMark(this)));
     createMenuItem(menu, "Unmark", e -> State.setState(new StateUnmark(this)));
     createMenuItem(menu, "Resize", e -> State.setState(new StateResize(this)));
-    createMenuItem(menu, "Merge", e -> State.setState(new StateMerge(this)));
-    createMenuItem(menu, "Unmerge", e -> State.setState(new StateUnmerge(this)));
 
     JMenu addMenu = new JMenu("Add");
     JMenu customShapes = new JMenu("Custom Shapes");
 
     createMenuItem(addMenu, "Add marked shapes to custom tool", e -> {
-      createMenuItem(customShapes, "Custom shape", f -> {
-        State.setState(new StateInsertCustom(this, shapeContainer.getIsMarked()));
-      });
-      System.out.println(State.getCurrentState());
+      customShapeName = JOptionPane.showInputDialog("Ange namn på figur:");
+    createMenuItem(customShapes, customShapeName, f -> {State.setState(new StateInsertCustom(this));});
     });
-
-
     createMenuItem(addMenu, "Remove marked shapes to custom tool", e -> customShapes.removeAll());
-
-
 
     JMenuBar menuBar = new JMenuBar();
     menuBar.add(menu);
@@ -117,7 +112,7 @@ public class ShapeApp extends JFrame
     return StyleFactory.getInstance().getStyle(color, lineWidth);
   }
 
-  public static void main(String args[])
+  public static void main(String[] args)
   {
     new ShapeApp(); // obs egentligen SwingUtilities ...
   }

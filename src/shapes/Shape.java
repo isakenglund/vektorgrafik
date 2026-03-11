@@ -7,18 +7,16 @@ import java.awt.*;
 
 public abstract class Shape
   {
-
     private Point center;
     private double width, height;
     private boolean marked;
     private Style style;
-    private Graphics2D g2;
 
-    public Shape(Shape shape) {
+      public Shape(Shape shape) {
       this.center = new Point(shape.getPosition());
       this.width = shape.getWidth();
       this.height = shape.getHeight();
-      this.marked = shape.isMarked();
+      this.marked = false;
       this.style = shape.getStyle();
     }
 
