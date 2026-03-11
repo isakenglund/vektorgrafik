@@ -6,6 +6,9 @@ import shapes.Shape;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +16,7 @@ import javax.swing.JPanel;
 
 import states.State;
 
-public class ShapeContainer extends JPanel implements Pointable
+public class ShapeContainer extends JPanel implements Pointable, Printable
   {
   private static final long serialVersionUID = 1L;
   private List<Shape>       shapes           = new LinkedList<>();
@@ -82,5 +85,10 @@ public class ShapeContainer extends JPanel implements Pointable
 
     public List<Shape> getIsMarked() {
     return shapes.stream().filter(Shape::isMarked).toList();
+    }
+
+    @Override
+    public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+      return 0;
     }
   }
