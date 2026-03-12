@@ -9,7 +9,7 @@ public class Text extends Shape {
     private final String text;
 
     public Text(Point p, double width, double height, Style style, String text) {
-        super(p,width,height, style);
+        super(p, width, height, style);
         this.text = text;
     }
 
@@ -23,7 +23,7 @@ public class Text extends Shape {
         super.draw(g);
 
         g.setFont(new Font("Arial", Font.BOLD, (int) getHeight()));
-        g.drawString(this.text , (int) (getPosition().getX()-getWidth()/2), (int) (getPosition().getY()+getHeight()/2));
+        g.drawString(this.text, (int) (getPosition().getX() - getWidth() / 2), (int) (getPosition().getY() + getHeight() / 2));
     }
 
     @Override

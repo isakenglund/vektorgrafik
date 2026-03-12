@@ -3,7 +3,7 @@ package model.command;
 import view.ShapeContainer;
 import model.shapes.Shape;
 
-public class CommandRemoveShape implements Command{
+public class CommandRemoveShape implements Command {
     private final ShapeContainer container;
     private final Shape shape;
 

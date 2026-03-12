@@ -3,9 +3,9 @@ package controller.states;
 import view.ShapeApp;
 import model.shapes.Point;
 
-public class StateDelete extends State{
+public class StateDelete extends State {
 
-    public StateDelete(ShapeApp app){
+    public StateDelete(ShapeApp app) {
         super(app);
     }
 

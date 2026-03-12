@@ -9,7 +9,8 @@ import model.shapes.style.Style;
 public class StateInsertLine extends StateInsert {
 
     public StateInsertLine(ShapeApp app) {
-        super(app);    }
+        super(app);
+    }
 
     @Override
     protected Shape createShape(Point start, double width, double height, Style style) {

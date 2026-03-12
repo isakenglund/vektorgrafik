@@ -3,8 +3,8 @@ package controller.states;
 import view.ShapeApp;
 import model.shapes.Point;
 
-public class StateRotate extends State{
-    public StateRotate(ShapeApp app){
+public class StateRotate extends State {
+    public StateRotate(ShapeApp app) {
         super(app);
     }
 
@@ -14,10 +14,9 @@ public class StateRotate extends State{
     }
 
 
-
     @Override
     public void pointerMoved(Point point, boolean pointerDown) {
-        if(app.getShapeContainer().getSelected() != null && pointerDown) {
+        if (app.getShapeContainer().getSelected() != null && pointerDown) {
             app.getShapeContainer().repaint();
         }
     }

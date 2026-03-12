@@ -1,12 +1,13 @@
 package model.shapes;
 
 import java.awt.*;
+
 import model.shapes.style.Style;
 
 public class Rectangle extends Shape {
 
     public Rectangle(Point p, double width, double height, Style style) {
-        super(p,width,height, style);
+        super(p, width, height, style);
     }
 
     public Rectangle(Rectangle rectangle) {
@@ -18,15 +19,13 @@ public class Rectangle extends Shape {
         super.draw(g);
 
 
-        int rX = (int) (getPosition().getX() + getWidth()/2);
-        int lX = (int) (getPosition().getX() - getWidth()/2);
+        int rX = (int) (getPosition().getX() + getWidth() / 2);
+        int lX = (int) (getPosition().getX() - getWidth() / 2);
 
-        int tY = (int) (getPosition().getY() - getHeight()/2);
-        int bY = (int) (getPosition().getY() + getHeight()/2);
+        int tY = (int) (getPosition().getY() - getHeight() / 2);
+        int bY = (int) (getPosition().getY() + getHeight() / 2);
 
-        g.drawPolygon(new int[]{lX, lX, rX,rX}, new int[]{tY,bY,bY,tY}, 4);
-
-        //g.drawRect((int) (getPosition().getX()-getWidth()/2), (int) (getPosition().getY()-getHeight()/2), (int) getWidth(), (int) getHeight());
+        g.drawPolygon(new int[]{lX, lX, rX, rX}, new int[]{tY, bY, bY, tY}, 4);
     }
 
     @Override

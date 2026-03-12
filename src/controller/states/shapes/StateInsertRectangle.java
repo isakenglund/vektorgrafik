@@ -6,9 +6,10 @@ import model.shapes.Rectangle;
 import model.shapes.Shape;
 import model.shapes.style.Style;
 
-public class StateInsertRectangle extends StateInsert{
+public class StateInsertRectangle extends StateInsert {
     public StateInsertRectangle(ShapeApp app) {
-        super(app);    }
+        super(app);
+    }
 
     @Override
     protected Shape createShape(Point start, double width, double height, Style style) {

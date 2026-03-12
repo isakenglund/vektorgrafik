@@ -19,12 +19,12 @@ public class Triangle extends Shape {
     public void draw(Graphics g) {
         super.draw(g);
 
-        int rightX = (int) (getPosition().getX() + getWidth()/2);
+        int rightX = (int) (getPosition().getX() + getWidth() / 2);
         int middleX = (int) (getPosition().getX());
-        int leftX = (int) (getPosition().getX()- getWidth()/2);
+        int leftX = (int) (getPosition().getX() - getWidth() / 2);
 
-        int topY = (int) (getPosition().getY() - getHeight()/2);
-        int bottomY = (int) (getPosition().getY() + getHeight()/2);
+        int topY = (int) (getPosition().getY() - getHeight() / 2);
+        int bottomY = (int) (getPosition().getY() + getHeight() / 2);
 
         g.drawPolygon(new int[]{leftX, middleX, rightX}, new int[]{bottomY, topY, bottomY}, 3);
     }

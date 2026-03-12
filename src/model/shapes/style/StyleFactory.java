@@ -8,10 +8,11 @@ public class StyleFactory {
     private static StyleFactory instance;
     private HashMap<String, Style> styles;
 
-    private StyleFactory() {};
+    private StyleFactory() {
+    }
 
     public static StyleFactory getInstance() {
-        if (instance == null){
+        if (instance == null) {
             instance = new StyleFactory();
             instance.styles = new HashMap<>();
         }

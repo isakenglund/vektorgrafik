@@ -3,8 +3,8 @@ package controller.states;
 import view.ShapeApp;
 import model.shapes.Point;
 
-public class StateResize extends State{
-    public StateResize(ShapeApp app){
+public class StateResize extends State {
+    public StateResize(ShapeApp app) {
         super(app);
     }
 
@@ -14,10 +14,9 @@ public class StateResize extends State{
     }
 
 
-
     @Override
     public void pointerMoved(Point point, boolean pointerDown) {
-        if(app.getShapeContainer().getSelected() != null && pointerDown) {
+        if (app.getShapeContainer().getSelected() != null && pointerDown) {
             app.getShapeContainer().getSelected().resizeTo(point);
             app.getShapeContainer().repaint();
         }

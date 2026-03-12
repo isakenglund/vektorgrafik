@@ -18,128 +18,125 @@ import javax.swing.JPanel;
 
 import controller.states.State;
 
-public class ShapeContainer extends JPanel implements Pointable, Printable
-  {
-  private static final long serialVersionUID = 1L;
-  private List<Shape>       shapes           = new LinkedList<>();
-  private Shape selected;
+public class ShapeContainer extends JPanel implements Pointable, Printable {
+    private static final long serialVersionUID = 1L;
+    private List<Shape> shapes = new LinkedList<>();
+    private Shape selected;
 
-  private final Stack<List<Shape>> undoStack = new Stack<>();
-  private final Stack<List<Shape>> redoStack = new Stack<>();
+    private final Stack<List<Shape>> undoStack = new Stack<>();
+    private final Stack<List<Shape>> redoStack = new Stack<>();
 
-  public ShapeContainer()
-    {
-    super();
-    MouseHandler mouseHandler = new MouseHandler(this);
-    this.addMouseListener(mouseHandler);
-    this.addMouseMotionListener(mouseHandler);
-    this.setBackground(Color.white);
+    public ShapeContainer() {
+        super();
+        MouseHandler mouseHandler = new MouseHandler(this);
+        this.addMouseListener(mouseHandler);
+        this.addMouseMotionListener(mouseHandler);
+        this.setBackground(Color.white);
     }
 
     public void addShape(Shape shape) {
-      saveState();
-      shapes.add(shape);
-      repaint();
+        saveState();
+        shapes.add(shape);
+        repaint();
     }
 
     public void removeShape(Shape shape) {
-      saveState();
-      shapes.remove(shape);
-      repaint();
+        saveState();
+        shapes.remove(shape);
+        repaint();
     }
 
     public void addShapeTemp(Shape shape) {
-      shapes.add(shape);
-      repaint();
+        shapes.add(shape);
+        repaint();
     }
 
     public void removeShapeTemp(Shape shape) {
-      shapes.remove(shape);
-      repaint();
+        shapes.remove(shape);
+        repaint();
     }
 
-    public void paintComponent(Graphics g)
-    {
-      super.paintComponent(g);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
-      for (Shape shape : shapes)
-        shape.draw(g);
+        for (Shape shape : shapes)
+            shape.draw(g);
     }
 
-  public void select(Point point)
-    {
-    for (Shape shape : shapes)
-      {
-      if (shape.intersects(point))
-        {
-        selected = shape;
-        return;
+    public void select(Point point) {
+        for (Shape shape : shapes) {
+            if (shape.intersects(point)) {
+                selected = shape;
+                return;
+            }
         }
-      }
     }
 
     public Shape getSelected() {
-      return selected;
+        return selected;
     }
 
     public void setSelected(Shape shape) {
-    selected = shape;
+        selected = shape;
     }
 
     public List<Shape> getShapes() {
-    return shapes;
+        return shapes;
     }
 
-  public void pointerDown(Point point) {State.getCurrentState().pointerDown(point);}
-
-  public void pointerUp(Point point)
-    {
-      State.getCurrentState().pointerUp(point);
+    public void pointerDown(Point point) {
+        State.getCurrentState().pointerDown(point);
     }
 
-  public void pointerMoved(Point point, boolean pointerDown) {State.getCurrentState().pointerMoved(point, pointerDown);}
+    public void pointerUp(Point point) {
+        State.getCurrentState().pointerUp(point);
+    }
+
+    public void pointerMoved(Point point, boolean pointerDown) {
+        State.getCurrentState().pointerMoved(point, pointerDown);
+    }
 
     public List<Shape> getIsMarked() {
-    return shapes.stream().filter(Shape::isMarked).toList();
+        return shapes.stream().filter(Shape::isMarked).toList();
     }
 
     @Override
     public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-      return 0;
+        return 0;
     }
 
     private List<Shape> deepCopyShapes(List<Shape> original) {
-      List<Shape> copy = new LinkedList<>();
-      for (Shape shape : original) {
-        copy.add(shape.clone());
-      }
-      return copy;
+        List<Shape> copy = new LinkedList<>();
+        for (Shape shape : original) {
+            copy.add(shape.clone());
+        }
+        return copy;
     }
 
     public void saveState() {
-      undoStack.push(deepCopyShapes(shapes));
-      redoStack.clear();
+        undoStack.push(deepCopyShapes(shapes));
+        redoStack.clear();
     }
 
     public void undo() {
-      if (!undoStack.isEmpty()) {
-        redoStack.push(deepCopyShapes(shapes));
-        shapes = undoStack.pop();
-        selected = null;
-        repaint();
-      } else {
-        System.out.println("Undo stack is empty");
-      }
+        if (!undoStack.isEmpty()) {
+            redoStack.push(deepCopyShapes(shapes));
+            shapes = undoStack.pop();
+            selected = null;
+            repaint();
+        } else {
+            System.out.println("Undo stack is empty");
+        }
     }
 
     public void redo() {
-      if (!redoStack.isEmpty()) {
-        undoStack.push(deepCopyShapes(shapes));
-        shapes = redoStack.pop();
-        selected = null;
-        repaint();
-      } else {
-        System.out.println("Redo stack is empty");
-      }
+        if (!redoStack.isEmpty()) {
+            undoStack.push(deepCopyShapes(shapes));
+            shapes = redoStack.pop();
+            selected = null;
+            repaint();
+        } else {
+            System.out.println("Redo stack is empty");
+        }
     }
-  }
+}

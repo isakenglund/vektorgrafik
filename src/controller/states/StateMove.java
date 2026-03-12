@@ -10,7 +10,7 @@ public class StateMove extends State {
     private Point lastMousePosition;
     private boolean isDraggingMarkedGroup;
 
-    public StateMove(ShapeApp app){
+    public StateMove(ShapeApp app) {
         super(app);
     }
 
@@ -30,7 +30,7 @@ public class StateMove extends State {
 
     @Override
     public void pointerMoved(Point point, boolean pointerDown) {
-        if(pointerDown && lastMousePosition != null) {
+        if (pointerDown && lastMousePosition != null) {
 
             double dx = point.getX() - lastMousePosition.getX();
             double dy = point.getY() - lastMousePosition.getY();

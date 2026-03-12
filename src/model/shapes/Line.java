@@ -18,9 +18,9 @@ public class Line extends Shape {
     public void draw(Graphics g) {
         super.draw(g);
         int x1 = (int) (getPosition().getX() - getWidth() / 2);
-        int y1 = (int) (getPosition().getY() - getHeight()/2 );
+        int y1 = (int) (getPosition().getY() - getHeight() / 2);
         int x2 = (int) (getPosition().getX() + getWidth() / 2);
-        int y2 = (int) (getPosition().getY()+ getHeight()/2 );
+        int y2 = (int) (getPosition().getY() + getHeight() / 2);
 
         g.drawLine(x1, y1, x2, y2);
     }

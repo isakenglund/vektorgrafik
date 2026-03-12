@@ -15,10 +15,10 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class ShapeController {
 
     public void updateShapes(ShapeApp shapeApp) {
-        for(Shape shape: shapeApp.getShapeContainer().getShapes()) {
+        for (Shape shape : shapeApp.getShapeContainer().getShapes()) {
             Shape actualShape = shape.peel();
 
-            if(actualShape.isMarked()) {
+            if (actualShape.isMarked()) {
                 actualShape.setStyle(shapeApp.getCurrentStyle());
             }
         }
@@ -31,8 +31,7 @@ public class ShapeController {
         panel.add(button);
     }
 
-    public void createMenuItem(JMenu menu, String label, ActionListener listener)
-    {
+    public void createMenuItem(JMenu menu, String label, ActionListener listener) {
         JRadioButton menuItem = new JRadioButton(label);
         menuItem.addActionListener(listener);
         menu.add(menuItem);

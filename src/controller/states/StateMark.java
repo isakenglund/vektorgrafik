@@ -12,20 +12,20 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StateMark extends State{
+public class StateMark extends State {
     private Point pointDown;
     private Point startPoint;
     private Shape tempShape;
     private List<Shape> shapesOnCanvas;
 
 
-    public StateMark(ShapeApp app){
+    public StateMark(ShapeApp app) {
         super(app);
     }
 
     @Override
     public void pointerDown(Point point) {
-        this.pointDown=point;
+        this.pointDown = point;
         this.startPoint = point;
         shapesOnCanvas = app.getShapeContainer().getShapes();
     }
@@ -52,9 +52,9 @@ public class StateMark extends State{
     @Override
     public void pointerUp(Point point) {
         app.getShapeContainer().removeShapeTemp(tempShape);
-        List<Shape> shapesInMerge = mergeShapes(shapesOnCanvas,pointDown,point);
+        List<Shape> shapesInMerge = mergeShapes(shapesOnCanvas, pointDown, point);
 
-        for(Shape shape: shapesInMerge) {
+        for (Shape shape : shapesInMerge) {
             shape.setMarked(true);
             shapesOnCanvas.add(new ShapeDecorator(shape));
         }
@@ -70,12 +70,11 @@ public class StateMark extends State{
         List<Shape> shapesInMerge = new ArrayList<>();
 
         list.forEach(shape -> {
-            if(shape.getPosition().getX()>pointDown.getX()&&
-                    shape.getPosition().getX()<pointUp.getX()&&
-                    shape.getPosition().getY()>pointDown.getY()&&
-                    shape.getPosition().getY()<pointUp.getY()
-            )
-            {
+            if (shape.getPosition().getX() > pointDown.getX() &&
+                    shape.getPosition().getX() < pointUp.getX() &&
+                    shape.getPosition().getY() > pointDown.getY() &&
+                    shape.getPosition().getY() < pointUp.getY()
+            ) {
                 shapesInMerge.add(shape);
             }
         });

@@ -10,9 +10,8 @@ public class CompositeShape extends Shape implements Composite {
 
     private List<Shape> shapesList;
 
-    public CompositeShape(Point p, double width, double height, List<Shape> shapesList, Style style)
-    {
-        super(p,width,height, style);
+    public CompositeShape(Point p, double width, double height, List<Shape> shapesList, Style style) {
+        super(p, width, height, style);
         this.shapesList = new ArrayList<>(shapesList);
     }
 
@@ -23,32 +22,34 @@ public class CompositeShape extends Shape implements Composite {
 
 
     @Override
-    public void draw(Graphics g)
-    {
-        shapesList.forEach(shape -> {shape.draw(g);});
+    public void draw(Graphics g) {
+        shapesList.forEach(shape -> {
+            shape.draw(g);
+        });
     }
 
     @Override
-    public void setStyle(Style style){
-        shapesList.forEach(shape -> {shape.setStyle(style);});
+    public void setStyle(Style style) {
+        shapesList.forEach(shape -> {
+            shape.setStyle(style);
+        });
     }
 
 
     @Override
-    public void moveTo(Point point)
-    {
+    public void moveTo(Point point) {
         double dx = point.getX() - getPosition().getX();
         double dy = point.getY() - getPosition().getY();
         super.moveTo(point);
-        for(Shape shape : shapesList){
+        for (Shape shape : shapesList) {
             shape.move(dx, dy);
-        };
+        }
+        ;
     }
 
     @Override
-    public void move(double dx, double dy)
-    {
-        for(Shape shape : shapesList) shape.move(dx, dy);
+    public void move(double dx, double dy) {
+        for (Shape shape : shapesList) shape.move(dx, dy);
         getPosition().move(dx, dy);
     }
 
@@ -89,8 +90,7 @@ public class CompositeShape extends Shape implements Composite {
         }
     }
 
-    public Shape peel()
-    {
+    public Shape peel() {
         return this;
     }
 

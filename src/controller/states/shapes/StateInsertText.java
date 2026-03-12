@@ -6,7 +6,7 @@ import model.shapes.Shape;
 import model.shapes.style.Style;
 import model.shapes.Text;
 
-public class StateInsertText  extends StateInsert {
+public class StateInsertText extends StateInsert {
 
     private String text;
 

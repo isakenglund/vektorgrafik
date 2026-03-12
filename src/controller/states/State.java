@@ -10,21 +10,23 @@ public abstract class State implements Pointable {
 
     protected ShapeApp app;
 
-    public State(ShapeApp app){
+    public State(ShapeApp app) {
         this.app = app;
     }
 
-    public State getState(){return this;}
+    public State getState() {
+        return this;
+    }
 
-    public static void setState(State state){
+    public static void setState(State state) {
         currentState = state;
     }
 
-    public static void reset(ShapeApp app){
+    public static void reset(ShapeApp app) {
         setState(new StateInsertCircle(app));
     }
 
-    public static State getCurrentState(){
+    public static State getCurrentState() {
         return currentState;
     }
 

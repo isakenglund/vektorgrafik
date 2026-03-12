@@ -1,6 +1,7 @@
 package model.shapes;
 
 import java.awt.*;
+
 import model.shapes.style.Style;
 
 public class Pentagon extends Shape {
