@@ -116,7 +116,7 @@ public abstract class Shape
     public String toCSV() {
       Color c = getStyle().getColor();
 
-      return getClass().getName() + "," +
+      return getClass().getSimpleName() + "," +
               getPosition().getX() + "," +
               getPosition().getY() + "," +
               getWidth() + "," +

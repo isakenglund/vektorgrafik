@@ -102,7 +102,24 @@ public class CompositeShape extends Shape implements Composite {
 
     @Override
     public String toCSV() {
-        return getClass().getSimpleName();
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(getClass().getSimpleName()).append(",")
+                .append(getPosition().getX()).append(",")
+                .append(getPosition().getY()).append(",")
+                .append(getWidth()).append(",")
+                .append(getHeight()).append(",")
+                .append(getStyle().getColor().getRed()).append(",")
+                .append(getStyle().getColor().getGreen()).append(",")
+                .append(getStyle().getColor().getBlue()).append(",")
+                .append(getStyle().getLineWidth()).append(",")
+                .append(getNumberOfChildren());
+
+        for (Shape shape : shapesList) {
+            sb.append("\n").append(shape.toCSV());
+        }
+
+        return sb.toString();
     }
 
     @Override
@@ -113,6 +130,10 @@ public class CompositeShape extends Shape implements Composite {
     @Override
     public boolean intersects(Point point) {
         return shapesList.stream().anyMatch(shape -> shape.intersects(point));
+    }
+
+    public int getNumberOfChildren() {
+        return shapesList.size();
     }
 
 

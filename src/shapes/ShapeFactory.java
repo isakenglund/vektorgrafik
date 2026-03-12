@@ -4,11 +4,12 @@ import shapes.style.Style;
 import shapes.style.StyleFactory;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ShapeFactory {
 
     public static Shape createShapeFromCsv(String[] csv) {
-        String shapeType = csv[0].substring(csv[0].lastIndexOf('.') + 1).toLowerCase();
+        String shapeType = csv[0];
 
         double x = Double.parseDouble(csv[1]);
         double y = Double.parseDouble(csv[2]);
@@ -25,12 +26,15 @@ public class ShapeFactory {
         Style style = StyleFactory.getInstance().getStyle(color, lineWidth);
 
         return switch (shapeType) {
-            case "triangle" -> new Triangle(p, width, height, style);
-            case "rectangle" -> new Rectangle(p, width, height, style);
-            case "circle" -> new Circle(p, width, height, style);
-            case "line" -> new Line(p, width, height, style);
-            case "pentagon" -> new Pentagon(p, width, height, style);
+            case "Triangle" -> new Triangle(p, width, height, style);
+            case "Rectangle" -> new Rectangle(p, width, height, style);
+            case "Circle" -> new Circle(p, width, height, style);
+            case "Line" -> new Line(p, width, height, style);
+            case "Pentagon" -> new Pentagon(p, width, height, style);
+            case "CompositeShape" -> new CompositeShape(p, width, height, new ArrayList<>(), style);
             default -> throw new IllegalArgumentException("Unknown shape: " + shapeType);
         };
     }
+
+
 }
