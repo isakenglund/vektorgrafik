@@ -6,18 +6,18 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompositeShape extends Shape implements Composite {
+public class CompositeShape extends model.shapes.Shape implements model.shapes.Composite {
 
-    private List<Shape> shapesList;
+    private List<model.shapes.Shape> shapesList;
 
-    public CompositeShape(Point p, double width, double height, List<Shape> shapesList, Style style) {
+    public CompositeShape(model.shapes.Point p, double width, double height, List<model.shapes.Shape> shapesList, Style style) {
         super(p, width, height, style);
         this.shapesList = new ArrayList<>(shapesList);
     }
 
     public CompositeShape(CompositeShape compositeShape) {
         super(compositeShape);
-        this.shapesList = compositeShape.getChildren().stream().map(Shape::clone).toList();
+        this.shapesList = compositeShape.getChildren().stream().map(model.shapes.Shape::clone).toList();
     }
 
 
@@ -37,11 +37,11 @@ public class CompositeShape extends Shape implements Composite {
 
 
     @Override
-    public void moveTo(Point point) {
+    public void moveTo(model.shapes.Point point) {
         double dx = point.getX() - getPosition().getX();
         double dy = point.getY() - getPosition().getY();
         super.moveTo(point);
-        for (Shape shape : shapesList) {
+        for (model.shapes.Shape shape : shapesList) {
             shape.move(dx, dy);
         }
         ;
@@ -49,12 +49,12 @@ public class CompositeShape extends Shape implements Composite {
 
     @Override
     public void move(double dx, double dy) {
-        for (Shape shape : shapesList) shape.move(dx, dy);
+        for (model.shapes.Shape shape : shapesList) shape.move(dx, dy);
         getPosition().move(dx, dy);
     }
 
     @Override
-    public void resizeTo(Point point) {
+    public void resizeTo(model.shapes.Point point) {
         double oldWidth = getWidth();
         double oldHeight = getHeight();
 
@@ -67,12 +67,12 @@ public class CompositeShape extends Shape implements Composite {
         double scaleX = getWidth() / oldWidth;
         double scaleY = getHeight() / oldHeight;
 
-        for (Shape shape : shapesList) {
+        for (model.shapes.Shape shape : shapesList) {
 
             double relativeX = (shape.getPosition().getX() - getPosition().getX()) * scaleX;
             double relativeY = (shape.getPosition().getY() - getPosition().getY()) * scaleY;
 
-            Point newCenter = new Point(
+            model.shapes.Point newCenter = new model.shapes.Point(
                     getPosition().getX() + relativeX,
                     getPosition().getY() + relativeY
             );
@@ -81,7 +81,7 @@ public class CompositeShape extends Shape implements Composite {
             double newHalfWidth = (shape.getWidth() * scaleX) / 2.0;
             double newHalfHeight = (shape.getHeight() * scaleY) / 2.0;
 
-            Point newCorner = new Point(
+            model.shapes.Point newCorner = new model.shapes.Point(
                     shape.getPosition().getX() + newHalfWidth,
                     shape.getPosition().getY() + newHalfHeight
             );
@@ -90,17 +90,17 @@ public class CompositeShape extends Shape implements Composite {
         }
     }
 
-    public Shape peel() {
+    public model.shapes.Shape peel() {
         return this;
     }
 
     @Override
-    public Shape clone() {
+    public model.shapes.Shape clone() {
         return new CompositeShape(this);
     }
 
     @Override
-    public List<Shape> getChildren() {
+    public List<model.shapes.Shape> getChildren() {
         return shapesList;
     }
 

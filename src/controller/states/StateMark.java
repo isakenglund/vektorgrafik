@@ -2,7 +2,7 @@ package controller.states;
 
 import view.ShapeApp;
 import view.ShapeContainer;
-import model.ShapeDecorator;
+import model.shapes.ShapeDecorator;
 import model.shapes.Point;
 import model.shapes.Rectangle;
 import model.shapes.Shape;

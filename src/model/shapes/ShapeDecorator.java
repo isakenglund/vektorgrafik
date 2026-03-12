@@ -1,7 +1,4 @@
-package model;
-
-import model.shapes.Point;
-import model.shapes.Shape;
+package model.shapes;
 
 import java.awt.*;
 
