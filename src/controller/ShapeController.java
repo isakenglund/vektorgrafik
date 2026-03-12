@@ -25,17 +25,6 @@ public class ShapeController {
         shapeApp.getShapeContainer().repaint();
     }
 
-    public void createPanelButton(JPanel panel, String label, ActionListener listener) {
-        JButton button = new JButton(label);
-        button.addActionListener(listener);
-        panel.add(button);
-    }
-
-    public void createMenuItem(JMenu menu, String label, ActionListener listener) {
-        JRadioButton menuItem = new JRadioButton(label);
-        menuItem.addActionListener(listener);
-        menu.add(menuItem);
-    }
 
     public void printComponent(Component component) {
         PrinterJob pj = PrinterJob.getPrinterJob();
