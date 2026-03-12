@@ -46,9 +46,5 @@ public class Pentagon extends Shape {
         return new Pentagon(this);
     }
 
-    @Override
-    public String toCSV() {
-        return "";
-    }
 
 }

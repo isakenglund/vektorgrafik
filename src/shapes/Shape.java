@@ -113,6 +113,18 @@ public abstract class Shape
       visitor.visit(this);
     }
 
-    public abstract String toCSV();
+    public String toCSV() {
+      Color c = getStyle().getColor();
+
+      return getClass().getName() + "," +
+              getPosition().getX() + "," +
+              getPosition().getY() + "," +
+              getWidth() + "," +
+              getHeight() + "," +
+              c.getRed() + "," +
+              c.getGreen() + "," +
+              c.getBlue() + "," +
+              getStyle().getLineWidth();
+    }
 
   }

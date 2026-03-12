@@ -95,8 +95,6 @@ public class ShapeContainer extends JPanel implements Pointable, Printable
     public String exportShapesToCSV() {
       StringBuilder csv = new StringBuilder();
 
-      csv.append("type,data\n");
-
       for (Shape shape : shapes) {
         csv.append(shape.toCSV()).append("\n");
       }

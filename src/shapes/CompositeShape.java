@@ -102,7 +102,7 @@ public class CompositeShape extends Shape implements Composite {
 
     @Override
     public String toCSV() {
-        return "";
+        return getClass().getSimpleName();
     }
 
     @Override
@@ -115,12 +115,5 @@ public class CompositeShape extends Shape implements Composite {
         return shapesList.stream().anyMatch(shape -> shape.intersects(point));
     }
 
-    /*
-    @Override
-    public void rotateTo(Point point) {
-        for(Shape shape : shapesList) shape.rotateTo(point);
-        super.rotateTo(point);
-    }
 
-     */
 }

@@ -34,8 +34,4 @@ public class Rectangle extends Shape {
         return new Rectangle(this);
     }
 
-    @Override
-    public String toCSV() {
-        return "";
-    }
 }

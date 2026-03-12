@@ -30,8 +30,4 @@ public class Line extends Shape {
         return new Line(this);
     }
 
-    @Override
-    public String toCSV() {
-        return "";
-    }
 }

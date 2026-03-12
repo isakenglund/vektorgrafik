@@ -19,7 +19,6 @@ public class Circle extends Shape {
   @Override
   public void draw(Graphics g) {
     super.draw(g);
-
     g.drawOval((int) (getPosition().getX()-getWidth()/2), (int) (getPosition().getY()-getHeight()/2), (int) getWidth(), (int) getHeight());
   }
 
@@ -28,8 +27,4 @@ public class Circle extends Shape {
     return new Circle(this);
   }
 
-  @Override
-  public String toCSV() {
-    return "";
-  }
 }

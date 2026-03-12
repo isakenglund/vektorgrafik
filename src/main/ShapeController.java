@@ -1,10 +1,10 @@
 package main;
 
+import shapes.*;
 import shapes.Point;
-import shapes.Shape;
-import shapes.Circle;
 import shapes.Rectangle;
-import shapes.Triangle;
+import shapes.Shape;
+import shapes.style.Style;
 import shapes.style.StyleFactory;
 
 import javax.swing.*;
@@ -105,13 +105,8 @@ public class ShapeController {
 
         try (BufferedReader br = new BufferedReader(new FileReader(fileName + ".csv"))) {
             while ((line = br.readLine()) != null) {
-
                 String[] values = line.split(delimiter);
-
-                Shape shape = getShapeFromCsv(values);
-                if (shape != null) {
-                    shapeContainer.addShape(shape);
-                }
+                shapeContainer.addShape(ShapeFactory.createShapeFromCsv(values));
             }
             shapeContainer.repaint();
         } catch (IOException e) {
@@ -119,16 +114,5 @@ public class ShapeController {
         }
     }
 
-    public Shape getShapeFromCsv(String[] csv) {
-        switch (csv[0].toLowerCase()) {
-            case "triangle":
-                double x = Double.parseDouble(csv[1]);
-                double y = Double.parseDouble(csv[2]);
-                double width = Double.parseDouble(csv[3]);
-                double height = Double.parseDouble(csv[4]);
-                return new Triangle(new Point(x,y), width, height, StyleFactory.getInstance().getStyle(Color.BLACK, 1));
-            default:
-                return null;
-        }
-    }
+
 }
