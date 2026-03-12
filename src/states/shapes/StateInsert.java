@@ -29,7 +29,7 @@ public abstract class StateInsert extends State {
             ShapeContainer shapes = app.getShapeContainer();
 
             if (tempShape != null) {
-                shapes.removeShape(tempShape);
+                shapes.removeShapeTemp(tempShape);
             }
 
             double width = point.getX() - startPoint.getX();
@@ -38,8 +38,7 @@ public abstract class StateInsert extends State {
             Style currentStyle = app.getCurrentStyle();
             tempShape = createShape(startPoint, width, height, currentStyle);
 
-            shapes.addShape(tempShape);
-            shapes.repaint();
+            shapes.addShapeTemp(tempShape);
         }
     }
 
@@ -51,7 +50,7 @@ public abstract class StateInsert extends State {
         ShapeContainer shapes = app.getShapeContainer();
 
         if (tempShape != null) {
-            shapes.removeShape(tempShape);
+            shapes.removeShapeTemp(tempShape);
             tempShape = null;
         }
         if (startPoint != null) {
@@ -63,7 +62,6 @@ public abstract class StateInsert extends State {
         }
 
         startPoint = null;
-        shapes.repaint();
     }
 
 

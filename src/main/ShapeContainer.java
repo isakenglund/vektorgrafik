@@ -47,8 +47,17 @@ public class ShapeContainer extends JPanel implements Pointable, Printable
       repaint();
     }
 
-    public void paintComponent(Graphics g) // anropas av Swing när det är dags att
-    // rendera
+    public void addShapeTemp(Shape shape) {
+      shapes.add(shape);
+      repaint();
+    }
+
+    public void removeShapeTemp(Shape shape) {
+      shapes.remove(shape);
+      repaint();
+    }
+
+    public void paintComponent(Graphics g)
     {
       super.paintComponent(g);
 

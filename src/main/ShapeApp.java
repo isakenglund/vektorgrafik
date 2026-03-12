@@ -1,13 +1,10 @@
 package main;
 
-import command.Command;
 import shapes.style.Style;
 import shapes.style.StyleFactory;
 import states.*;
 import states.shapes.*;
-
 import java.awt.*;
-import java.util.Stack;
 
 
 import javax.swing.*;
