@@ -117,6 +117,8 @@ public class CompositeShape extends model.shapes.Shape implements model.shapes.C
             sb.append("\n").append(shape.toCSV());
         }
 
+        sb.append("\n").append("end");
+
         return sb.toString();
     }
 
@@ -132,6 +134,10 @@ public class CompositeShape extends model.shapes.Shape implements model.shapes.C
 
     public int getNumberOfChildren() {
         return shapesList.size();
+    }
+
+    public void unMarkAll(){
+        shapesList = shapesList.forEach(peel());
     }
 
 

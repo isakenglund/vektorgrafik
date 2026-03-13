@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 
 import controller.states.State;
 
-public class ShapeContainer extends JPanel implements Pointable, Printable {
+public class ShapeContainer extends JPanel implements Pointable {
     private static final long serialVersionUID = 1L;
     private List<Shape> shapes = new LinkedList<>();
     private Shape selected;
@@ -100,11 +100,6 @@ public class ShapeContainer extends JPanel implements Pointable, Printable {
         return shapes.stream().filter(Shape::isMarked).toList();
     }
 
-    @Override
-    public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-        return 0;
-    }
-
     private List<Shape> deepCopyShapes(List<Shape> original) {
         List<Shape> copy = new LinkedList<>();
         for (Shape shape : original) {
@@ -138,5 +133,15 @@ public class ShapeContainer extends JPanel implements Pointable, Printable {
         } else {
             System.out.println("Redo stack is empty");
         }
+    }
+
+    public String exportShapesToCSV() {
+        StringBuilder csv = new StringBuilder();
+
+        for (Shape shape : shapes) {
+            csv.append(shape.toCSV()).append("\n");
+        }
+
+        return csv.toString();
     }
 }

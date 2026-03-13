@@ -1,14 +1,14 @@
-package shapes;
-
-import shapes.style.Style;
-import shapes.style.StyleFactory;
-
+package model.shapes;
 import java.awt.*;
 import java.util.ArrayList;
+import model.shapes.style.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.List;
 
 public class ShapeFactory {
 
-    public static Shape createShapeFromCsv(String[] csv) {
+    public static Shape createShapeFromCsv(String[] csv, BufferedReader br) throws IOException {
         String shapeType = csv[0];
 
         double x = Double.parseDouble(csv[1]);
@@ -24,6 +24,21 @@ public class ShapeFactory {
         Point p = new Point(x - width / 2, y - height / 2);
 
         Style style = StyleFactory.getInstance().getStyle(color, lineWidth);
+
+        if (shapeType.equals("CompositeShape")) {
+            int numChildren = Integer.parseInt(csv[9]);
+            List<Shape> children = new ArrayList<>();
+
+            for (int i = 0; i < numChildren; i++) {
+                String line = br.readLine();
+                if (line != null && !line.equals("end")) {
+                    children.add(createShapeFromCsv(line.split(","), br));
+                }
+            }
+            br.readLine();
+
+            return new CompositeShape(p, width, height, children, style);
+        }
 
         return switch (shapeType) {
             case "Triangle" -> new Triangle(p, width, height, style);

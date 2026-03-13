@@ -73,6 +73,10 @@ public class ShapeApp extends JFrame {
         JButton printButton = new JButton("Print Canvas");
         printButton.addActionListener(e -> shapeController.printComponent(shapeContainer));
 
+        JMenu file = new JMenu("File");
+        shapeController.createMenuItem(file,"Export canvas", e -> shapeController.exportFile(shapeContainer));
+        shapeController.createMenuItem(file,"Import canvas", e -> shapeController.importFile(shapeContainer));
+
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(menu);
         menuBar.add(shapes);
@@ -142,6 +146,7 @@ public class ShapeApp extends JFrame {
     public Style getCurrentStyle() {
         return StyleFactory.getInstance().getStyle(color, lineWidth);
     }
+
 
     public static void main(String[] args) {
         new ShapeApp(); // obs egentligen SwingUtilities ...

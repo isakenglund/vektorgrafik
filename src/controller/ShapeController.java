@@ -1,14 +1,7 @@
 package controller;
-
-import shapes.*;
-import shapes.Point;
-import shapes.Rectangle;
-import shapes.Shape;
-import shapes.style.Style;
-import shapes.style.StyleFactory;
-import view.ShapeApp;
+import view.*;
+import model.shapes.*;
 import model.shapes.Shape;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.print.Printable;
@@ -38,7 +31,7 @@ public class ShapeController {
     }
 
 
-    public void printComponent(Component component) {
+    public void printComponent(ShapeContainer component) {
         PrinterJob pj = PrinterJob.getPrinterJob();
         pj.setJobName("Print Canvas");
 
@@ -60,6 +53,8 @@ public class ShapeController {
 
             g2.translate(pf.getImageableX(), pf.getImageableY());
             g2.scale(scale, scale);
+
+            component.unMarkAll();
 
             component.paint(g2);
 
@@ -102,17 +97,17 @@ public class ShapeController {
 
     public void importFile(ShapeContainer shapeContainer) {
         String fileName = JOptionPane.showInputDialog("Enter file name");
-        String delimiter = ",";
-        String line;
-
         try (BufferedReader br = new BufferedReader(new FileReader(fileName + ".csv"))) {
+            String line;
             while ((line = br.readLine()) != null) {
-                String[] values = line.split(delimiter);
-                shapeContainer.addShape(ShapeFactory.createShapeFromCsv(values));
+                if (line.trim().isEmpty() || line.equals("end")) continue;
+
+                String[] values = line.split(",");
+                shapeContainer.addShape(ShapeFactory.createShapeFromCsv(values, br));
             }
             shapeContainer.repaint();
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            System.err.println("Fel vid inläsning: " + e.getMessage());
         }
     }
 
