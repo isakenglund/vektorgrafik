@@ -5,10 +5,11 @@ import model.shapes.Shape;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.util.*;
+import java.util.List;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
@@ -63,5 +64,17 @@ public class ShapeController {
         } catch (PrinterException e) {
             showMessageDialog(null, "Error printing component", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public List<Shape> getMarkedShapes (ShapeApp app){
+
+        List<Shape> savedShapes = new ArrayList<>();
+        List<Shape> currentlyMarked = app.getShapeContainer().getIsMarked();
+
+        for (Shape shape : currentlyMarked) {
+            savedShapes.add(shape.peel().clone());
+        }
+
+        return savedShapes;
     }
 }

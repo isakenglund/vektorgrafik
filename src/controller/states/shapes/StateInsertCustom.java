@@ -11,33 +11,35 @@ import java.util.List;
 
 public class StateInsertCustom extends StateInsert {
 
-    public StateInsertCustom(ShapeApp app) {
+    private List<Shape> listOfMarkedShapes;
+
+    public StateInsertCustom(ShapeApp app, List<Shape> savedShapes) {
         super(app);
+
+        listOfMarkedShapes = savedShapes;
     }
 
 
     @Override
     protected Shape createShape(Point start, double width, double height, Style style) {
-        List<Shape> markedShapes = app.getShapeContainer().getIsMarked();
-
-        if (markedShapes == null || markedShapes.isEmpty()) {
+        if (listOfMarkedShapes == null || listOfMarkedShapes.isEmpty()) {
             return null; // Säkerhet om inget är markerat
         }
 
-        // 1. Klona figurerna och räkna ut deras ursprungliga position och storlek!
-        List<Shape> clones = new ArrayList<>();
+        List<Shape> clonesForDrawing = new ArrayList<>();
+        for (Shape shape : listOfMarkedShapes) {
+            clonesForDrawing.add(shape.clone());
+        }
+
         double minX = Double.MAX_VALUE;
         double minY = Double.MAX_VALUE;
         double maxX = -Double.MAX_VALUE;
         double maxY = -Double.MAX_VALUE;
 
-        for (Shape shape : markedShapes) {
-            Shape clone = shape.peel().clone(); // Klonar för att inte förstöra originalen på ytan!
-            clones.add(clone);
-
-            double halfW = Math.abs(clone.getWidth()) / 2.0;
-            double halfH = Math.abs(clone.getHeight()) / 2.0;
-            Point pos = clone.getPosition();
+        for (Shape shape : clonesForDrawing) {
+            double halfW = Math.abs(shape.getWidth()) / 2.0;
+            double halfH = Math.abs(shape.getHeight()) / 2.0;
+            Point pos = shape.getPosition();
 
             minX = Math.min(minX, pos.getX() - halfW);
             minY = Math.min(minY, pos.getY() - halfH);
@@ -45,21 +47,16 @@ public class StateInsertCustom extends StateInsert {
             maxY = Math.max(maxY, pos.getY() + halfH);
         }
 
-        // 2. Skapa gruppen på sin originalplats först.
-        // I din Shape-klass hanteras 'p' som övre vänstra hörnet.
         Point originalTopLeft = new Point(minX, minY);
         double originalWidth = maxX - minX;
         double originalHeight = maxY - minY;
 
-        CompositeShape customShape = new CompositeShape(originalTopLeft, originalWidth, originalHeight, clones, style);
+        // Pass 'clonesForDrawing' to avoid reference issues on multiple inserts
+        CompositeShape customShape = new CompositeShape(originalTopLeft, originalWidth, originalHeight, clonesForDrawing, style);
 
-        // 3. Nu utnyttjar vi dina egna metoder för att tvinga in dem i den ruta du drar med musen!
-
-        // Flytta till musens mittpunkt...
         Point newCenter = new Point(start.getX() + width / 2.0, start.getY() + height / 2.0);
         customShape.moveTo(newCenter);
 
-        // ...och dra i hörnet så den skalas korrekt!
         Point newCorner = new Point(start.getX() + width, start.getY() + height);
         customShape.resizeTo(newCorner);
 

@@ -1,6 +1,7 @@
 package view;
 
 import controller.ShapeController;
+import model.shapes.Shape;
 import model.shapes.style.Style;
 import model.shapes.style.StyleFactory;
 import controller.states.*;
@@ -8,8 +9,8 @@ import controller.states.shapes.*;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-
-
+import java.util.*;
+import java.util.List;
 import javax.swing.*;
 
 public class ShapeApp extends JFrame {
@@ -53,8 +54,13 @@ public class ShapeApp extends JFrame {
         createMenuItem(manageCustomShapes, "Add marked shapes to custom tool", e -> {
             String name = JOptionPane.showInputDialog("Ange namn på figur:");
             if (name != null && !name.trim().isEmpty()) {
-                createRadioMenuItem(customShapes, buttonGroup,name, f ->
-                        State.setState(new StateInsertCustom(this)));
+
+                List<Shape> savedShapes = shapeController.getMarkedShapes(this);
+
+                createRadioMenuItem(customShapes, buttonGroup, name, f -> {
+                    State customState = new StateInsertCustom(this, savedShapes);
+                    State.setState(customState);
+                });
             }
         });
         createMenuItem(manageCustomShapes, "Remove marked shapes to custom tool", e -> customShapes.removeAll());
