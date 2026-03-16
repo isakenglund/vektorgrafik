@@ -25,6 +25,7 @@ public class StateMark extends State {
 
     @Override
     public void pointerDown(Point point) {
+        super.pointerDown(point);
         this.pointDown = point;
         this.startPoint = point;
         shapesOnCanvas = app.getShapeContainer().getShapes();

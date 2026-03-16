@@ -20,6 +20,7 @@ public abstract class StateInsert extends State {
 
     @Override
     public void pointerDown(Point point) {
+        super.pointerDown(point);
         startPoint = point;
     }
 

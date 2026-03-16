@@ -32,6 +32,10 @@ public abstract class State implements Pointable {
 
     @Override
     public void pointerDown(Point point) {
+        if (app.getShapeContainer().getSelected() != null){
+            System.out.println(app.getShapeContainer().getSelected());
+            app.getShapeContainer().saveState();
+        }
     }
 
 

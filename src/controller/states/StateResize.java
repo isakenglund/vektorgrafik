@@ -11,6 +11,7 @@ public class StateResize extends State {
     @Override
     public void pointerDown(Point point) {
         app.getShapeContainer().select(point);
+        super.pointerDown(point);
     }
 
 

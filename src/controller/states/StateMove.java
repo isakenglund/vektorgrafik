@@ -16,6 +16,7 @@ public class StateMove extends State {
 
     @Override
     public void pointerDown(Point point) {
+        super.pointerDown(point);
         lastMousePosition = point;
 
         app.getShapeContainer().select(point);
@@ -52,7 +53,6 @@ public class StateMove extends State {
 
     @Override
     public void pointerUp(Point point) {
-        app.getShapeContainer().saveState();
         lastMousePosition = null;
     }
 }
