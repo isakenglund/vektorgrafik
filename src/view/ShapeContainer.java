@@ -111,7 +111,9 @@ public class ShapeContainer extends JPanel implements Pointable {
 
     public void saveState() {
         undoStack.push(deepCopyShapes(shapes));
+        System.out.println(undoStack.peek());
         redoStack.clear();
+        repaint();
     }
 
     public void undo() {
