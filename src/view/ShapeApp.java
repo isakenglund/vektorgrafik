@@ -74,14 +74,15 @@ public class ShapeApp extends JFrame {
         printButton.addActionListener(e -> shapeController.printComponent(shapeContainer));
 
         JMenu file = new JMenu("File");
-        shapeController.createMenuItem(file,"Export canvas", e -> shapeController.exportFile(shapeContainer));
-        shapeController.createMenuItem(file,"Import canvas", e -> shapeController.importFile(shapeContainer));
+        createMenuItem(file,"Export canvas", e -> shapeController.exportFile(shapeContainer));
+        createMenuItem(file,"Import canvas", e -> shapeController.importFile(shapeContainer));
 
         JMenuBar menuBar = new JMenuBar();
         menuBar.add(menu);
         menuBar.add(shapes);
         menuBar.add(customShapes);
         menuBar.add(Box.createHorizontalGlue());
+        menuBar.add(file);
         menuBar.add(manageCustomShapes);
         menuBar.add(addTextButton);
         menuBar.add(printButton);

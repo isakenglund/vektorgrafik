@@ -136,9 +136,6 @@ public class CompositeShape extends model.shapes.Shape implements model.shapes.C
         return shapesList.size();
     }
 
-    public void unMarkAll(){
-        shapesList = shapesList.forEach(peel());
-    }
 
 
 }
