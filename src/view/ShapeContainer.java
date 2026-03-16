@@ -13,6 +13,7 @@ import java.awt.print.PrinterException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 import javax.swing.JPanel;
 
@@ -143,5 +144,12 @@ public class ShapeContainer extends JPanel implements Pointable {
         }
 
         return csv.toString();
+    }
+
+    public void unMarkAll() {
+        this.shapes = shapes.stream()
+                .map(Shape::peel)
+                .collect(Collectors.toCollection(LinkedList::new));
+        repaint();
     }
 }

@@ -18,9 +18,16 @@ public class Circle extends Shape {
 
     @Override
     public void draw(Graphics g) {
+        
         super.draw(g);
 
-        g.drawOval((int) (getPosition().getX() - getWidth() / 2), (int) (getPosition().getY() - getHeight() / 2), (int) getWidth(), (int) getHeight());
+        int w = (int) Math.abs(getWidth());
+        int h = (int) Math.abs(getHeight());
+
+        int x = (int) (getPosition().getX() - w / 2);
+        int y = (int) (getPosition().getY() - h / 2);
+
+        g.drawOval(x, y, w, h);
     }
 
     @Override

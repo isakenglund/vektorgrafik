@@ -137,7 +137,7 @@ public class CompositeShape extends model.shapes.Shape implements model.shapes.C
     }
 
     public void unMarkAll(){
-        shapesList = shapesList.forEach(peel());
+        shapesList = shapesList.stream().map(Shape::peel).toList();
     }
 
 

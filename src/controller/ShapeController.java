@@ -1,4 +1,5 @@
 package controller;
+import controller.states.State;
 import view.*;
 import model.shapes.*;
 import model.shapes.Shape;
@@ -31,7 +32,7 @@ public class ShapeController {
     }
 
 
-    public void printComponent(ShapeContainer component) {
+    public void printComponent(ShapeContainer component, ShapeApp shapeApp) {
         PrinterJob pj = PrinterJob.getPrinterJob();
         pj.setJobName("Print Canvas");
 
@@ -70,6 +71,7 @@ public class ShapeController {
         } catch (PrinterException e) {
             showMessageDialog(null, "Error printing component", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        State.reset(shapeApp);
     }
 
     public List<Shape> getMarkedShapes (ShapeApp app){
