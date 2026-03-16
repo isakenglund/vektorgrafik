@@ -5,6 +5,7 @@ import model.shapes.style.Style;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CompositeShape extends model.shapes.Shape implements model.shapes.Composite {
 
@@ -137,7 +138,13 @@ public class CompositeShape extends model.shapes.Shape implements model.shapes.C
     }
 
     public void unMarkAll(){
-        shapesList = shapesList.stream().map(Shape::peel).toList();
+        shapesList = shapesList.stream()
+                .map(shape -> {
+                    Shape peeledShape = shape.peel();
+                    peeledShape.setMarked(false);
+                    return peeledShape;
+                })
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
 

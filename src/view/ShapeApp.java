@@ -106,6 +106,10 @@ public class ShapeApp extends JFrame {
             this.color = Color.BLUE;
             shapeController.updateShapes(this);
         });
+        createPanelButton(objectTools, "Black", e -> {
+            this.color = Color.BLACK;
+            shapeController.updateShapes(this);
+        });
         createPanelButton(objectTools, "-", e -> {
             this.lineWidth = Math.max(1, this.lineWidth - 1);
             shapeController.updateShapes((this));

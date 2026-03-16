@@ -138,7 +138,7 @@ public class ShapeContainer extends JPanel implements Pointable {
 
     public String exportShapesToCSV() {
         StringBuilder csv = new StringBuilder();
-
+        unMarkAll();
         for (Shape shape : shapes) {
             csv.append(shape.toCSV()).append("\n");
         }

@@ -55,6 +55,7 @@ public class ShapeController {
             g2.translate(pf.getImageableX(), pf.getImageableY());
             g2.scale(scale, scale);
 
+            component.unMarkAll();
             component.paint(g2);
 
             return Printable.PAGE_EXISTS;
