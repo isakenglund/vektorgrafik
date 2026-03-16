@@ -23,7 +23,7 @@ public class StateInsertCustom extends StateInsert {
     @Override
     protected Shape createShape(Point start, double width, double height, Style style) {
         if (listOfMarkedShapes == null || listOfMarkedShapes.isEmpty()) {
-            return null; // Säkerhet om inget är markerat
+            return null;
         }
 
         List<Shape> clonesForDrawing = new ArrayList<>();
@@ -51,7 +51,6 @@ public class StateInsertCustom extends StateInsert {
         double originalWidth = maxX - minX;
         double originalHeight = maxY - minY;
 
-        // Pass 'clonesForDrawing' to avoid reference issues on multiple inserts
         CompositeShape customShape = new CompositeShape(originalTopLeft, originalWidth, originalHeight, clonesForDrawing, style);
 
         Point newCenter = new Point(start.getX() + width / 2.0, start.getY() + height / 2.0);

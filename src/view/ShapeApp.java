@@ -82,6 +82,7 @@ public class ShapeApp extends JFrame {
         menuBar.add(shapes);
         menuBar.add(customShapes);
         menuBar.add(Box.createHorizontalGlue());
+        menuBar.add(file);
         menuBar.add(manageCustomShapes);
         menuBar.add(addTextButton);
         menuBar.add(printButton);
