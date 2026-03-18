@@ -20,7 +20,7 @@ public class StateUnmark extends State {
             Shape unmarkedShape = selected.peel();
             unmarkedShape.setMarked(false);
             shapeContainer.removeShape(selected);
-            shapeContainer.addShape(unmarkedShape);
+            shapeContainer.addShapeTemp(unmarkedShape);
             app.getShapeContainer().repaint();
         }
     }

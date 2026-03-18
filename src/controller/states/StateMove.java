@@ -16,10 +16,11 @@ public class StateMove extends State {
 
     @Override
     public void pointerDown(Point point) {
-        super.pointerDown(point);
-        lastMousePosition = point;
 
+        lastMousePosition = point;
         app.getShapeContainer().select(point);
+
+        super.pointerDown(point);
         Shape selected = app.getShapeContainer().getSelected();
 
         if (selected != null && selected.peel().isMarked()) {

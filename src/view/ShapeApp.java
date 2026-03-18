@@ -91,7 +91,6 @@ public class ShapeApp extends JFrame {
 
     private void createToolbox() {
         JPanel toolbox = new JPanel();
-        JMenu shapes = new JMenu("Shapes");
         JPanel steps = new JPanel();
         JPanel objectTools = new JPanel();
 
