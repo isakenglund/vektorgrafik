@@ -7,9 +7,6 @@ import model.shapes.Shape;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -101,7 +98,7 @@ public class ShapeContainer extends JPanel implements Pointable {
         return shapes.stream().filter(Shape::isMarked).toList();
     }
 
-    private List<Shape> deepCopyShapes(List<Shape> original) {
+    private List<Shape> cloneShapes(List<Shape> original) {
         List<Shape> copy = new LinkedList<>();
         for (Shape shape : original) {
             copy.add(shape.clone());
@@ -110,7 +107,7 @@ public class ShapeContainer extends JPanel implements Pointable {
     }
 
     public void saveState() {
-        undoStack.push(deepCopyShapes(shapes));
+        undoStack.push(cloneShapes(shapes));
         System.out.println(undoStack.size());
         redoStack.clear();
         repaint();
@@ -118,7 +115,7 @@ public class ShapeContainer extends JPanel implements Pointable {
 
     public void undo() {
         if (!undoStack.isEmpty()) {
-            redoStack.push(deepCopyShapes(shapes));
+            redoStack.push(cloneShapes(shapes));
             shapes = undoStack.pop();
             selected = null;
             repaint();
@@ -129,7 +126,7 @@ public class ShapeContainer extends JPanel implements Pointable {
 
     public void redo() {
         if (!redoStack.isEmpty()) {
-            undoStack.push(deepCopyShapes(shapes));
+            undoStack.push(cloneShapes(shapes));
             shapes = redoStack.pop();
             selected = null;
             repaint();
