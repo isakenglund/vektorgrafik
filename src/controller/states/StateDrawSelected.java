@@ -2,14 +2,11 @@ package controller.states;
 
 import model.shapes.Point;
 import model.shapes.Shape;
-import model.visitor.MoveMarkedVisitor;
 import view.ShapeApp;
 
 public class StateDrawSelected extends State {
 
     private Point lastMousePosition;
-    private boolean isDraggingMarkedGroup;
-    private Shape selectedShape;
 
     public StateDrawSelected(ShapeApp app) {
         super(app);
@@ -19,7 +16,7 @@ public class StateDrawSelected extends State {
     public void pointerDown(Point point) {
         System.out.println("pointer down");
 
-        selectedShape = app.getShapeContainer().getSelected();
+        Shape selectedShape = app.getShapeContainer().getSelected();
         System.out.println("selected shape: " + selectedShape);
         if (selectedShape != null){
             System.out.println("pointer down");
