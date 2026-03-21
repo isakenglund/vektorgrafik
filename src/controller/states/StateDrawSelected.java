@@ -9,12 +9,13 @@ import model.shapes.style.StyleFactory;
 import view.ShapeApp;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class StateDrawSelected extends State {
 
     private Point lastMousePosition;
-    private ArrayList<Shape> shapes;
+    private List<Shape> shapes;
 
     public StateDrawSelected(ShapeApp app) {
         super(app);
@@ -22,15 +23,9 @@ public class StateDrawSelected extends State {
 
     @Override
     public void pointerDown(Point point) {
-        System.out.println("pointer down");
-        Shape selectedShape = app.getShapeContainer().getSelected();
-        System.out.println("selected shape: " + selectedShape);
-        if (selectedShape != null){
-            lastMousePosition = point;
-        }
+        System.out.println(app.getShapeContainer().getIsMarked().isEmpty());
 
-        shapes = (ArrayList<Shape>) app.getShapeContainer().getIsMarked();
-        if (!shapes.isEmpty()){
+        if (!app.getShapeContainer().getIsMarked().isEmpty()){
             lastMousePosition = point;
         }
 
@@ -38,8 +33,6 @@ public class StateDrawSelected extends State {
 
     @Override
     public void pointerMoved(Point point, boolean pointerDown) {
-        System.out.println("pointer moved");
-        System.out.println(lastMousePosition);
             if (lastMousePosition != null) {
                 double dx = point.getX() - lastMousePosition.getX();
                 double dy = point.getY() - lastMousePosition.getY();
@@ -48,13 +41,26 @@ public class StateDrawSelected extends State {
                 System.out.println(distance);
 
                 if(distance>10) {
-                    //app.getShapeContainer().addShape(app.getShapeContainer().getSelected().clone());
-                    //app.getShapeContainer().addShape(new Circle(point, 50,50, StyleFactory.getInstance().getStyle(Color.BLACK,1)));
-                    app.getShapeContainer().addShape(new CompositeShape(point, 10,10, shapes,StyleFactory.getInstance().getStyle(Color.BLACK,1) ));
+                    List<Shape> clonedShapes = app.getShapeContainer()
+                            .getIsMarked()
+                            .stream()
+                            .map(shape -> {
+                                Shape clone = shape.clone();
+                                clone.peel();
+                                return clone;
+                            })
+                            .collect(Collectors.toList());
 
+                    System.out.println("adding shapes");
+                    app.getShapeContainer().addShape(
+                            new CompositeShape(point, 10, 10, clonedShapes,
+                                    StyleFactory.getInstance().getStyle(Color.BLACK, 1))
+                    );
                     lastMousePosition = point;
+
+                    app.getShapeContainer().repaint();
+
                 }
-                app.getShapeContainer().repaint();
             }
     }
 
@@ -63,5 +69,6 @@ public class StateDrawSelected extends State {
         if(lastMousePosition != null) {
             lastMousePosition = null;
         }
+        app.getShapeContainer().repaint();
     }
 }
