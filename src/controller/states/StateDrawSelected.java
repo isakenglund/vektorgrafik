@@ -23,12 +23,9 @@ public class StateDrawSelected extends State {
 
     @Override
     public void pointerDown(Point point) {
-        System.out.println(app.getShapeContainer().getIsMarked().isEmpty());
-
         if (!app.getShapeContainer().getIsMarked().isEmpty()){
             lastMousePosition = point;
         }
-
     }
 
     @Override
@@ -38,28 +35,23 @@ public class StateDrawSelected extends State {
                 double dy = point.getY() - lastMousePosition.getY();
 
                 double distance = Math.sqrt(dx * dx + dy * dy);
-                System.out.println(distance);
 
-                if(distance>10) {
+                if(distance>10&&!app.getShapeContainer().getIsMarked().isEmpty()) {
                     List<Shape> clonedShapes = app.getShapeContainer()
                             .getIsMarked()
                             .stream()
                             .map(shape -> {
-                                Shape clone = shape.clone();
-                                clone.peel();
-                                return clone;
+                                Shape c = shape.peel().clone();
+                                c.setPosition(point);
+                                return c;
                             })
                             .collect(Collectors.toList());
-
-                    System.out.println("adding shapes");
-                    app.getShapeContainer().addShape(
-                            new CompositeShape(point, 10, 10, clonedShapes,
-                                    StyleFactory.getInstance().getStyle(Color.BLACK, 1))
-                    );
+                    System.out.println(clonedShapes.size());
+                    Shape s = new CompositeShape(point, 50,50, clonedShapes, StyleFactory.getInstance().getStyle(Color.BLACK, 1));
+                    s.setPosition(point);
+                    app.getShapeContainer().addShape(s);
                     lastMousePosition = point;
-
                     app.getShapeContainer().repaint();
-
                 }
             }
     }
@@ -69,6 +61,5 @@ public class StateDrawSelected extends State {
         if(lastMousePosition != null) {
             lastMousePosition = null;
         }
-        app.getShapeContainer().repaint();
     }
 }

@@ -108,7 +108,6 @@ public class ShapeContainer extends JPanel implements Pointable {
 
     public void saveState() {
         undoStack.push(cloneShapes(shapes));
-        System.out.println(undoStack.size());
         redoStack.clear();
         repaint();
     }
