@@ -40,6 +40,7 @@ public class ShapeApp extends JFrame {
         createRadioMenuItem(menu, buttonGroup, "Mark", e -> State.setState(new StateMark(this)));
         createRadioMenuItem(menu, buttonGroup, "Unmark", e -> State.setState(new StateUnmark(this)));
         createRadioMenuItem(menu, buttonGroup, "Resize", e -> State.setState(new StateResize(this)));
+        createRadioMenuItem(menu, buttonGroup, "Draw selected", e -> State.setState(new StateDrawSelected(this)));
 
         JMenu shapes = new JMenu("Shapes");
         createRadioMenuItem(shapes, buttonGroup, "Circle", e -> State.setState(new StateInsertCircle(this)));
