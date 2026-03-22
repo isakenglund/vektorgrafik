@@ -35,19 +35,20 @@ public class StateDrawSelected extends State {
                 double dy = point.getY() - lastMousePosition.getY();
 
                 double distance = Math.sqrt(dx * dx + dy * dy);
+                int maxDistance = 10;
+                int shapeSize = 50;
 
-                if(distance>10&&!app.getShapeContainer().getIsMarked().isEmpty()) {
-                    List<Shape> clonedShapes = app.getShapeContainer()
-                            .getIsMarked()
-                            .stream()
-                            .map(shape -> {
+                if(distance>maxDistance&&!app.getShapeContainer().getIsMarked().isEmpty()) {
+
+
+                    List<Shape> clonedShapes = app.getShapeContainer().getIsMarked().stream().map(shape -> {
                                 Shape c = shape.peel().clone();
                                 c.setPosition(point);
                                 return c;
-                            })
-                            .collect(Collectors.toList());
+                            }).collect(Collectors.toList());
+
                     System.out.println(clonedShapes.size());
-                    Shape s = new CompositeShape(point, 50,50, clonedShapes, StyleFactory.getInstance().getStyle(Color.BLACK, 1));
+                    Shape s = new CompositeShape(point, shapeSize,shapeSize, clonedShapes, StyleFactory.getInstance().getStyle(Color.BLACK, 1));
                     s.setPosition(point);
                     app.getShapeContainer().addShape(s);
                     lastMousePosition = point;
