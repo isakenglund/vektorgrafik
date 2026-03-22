@@ -1,10 +1,8 @@
 package controller.states;
 
-import model.shapes.Circle;
 import model.shapes.CompositeShape;
 import model.shapes.Point;
 import model.shapes.Shape;
-import model.shapes.style.Style;
 import model.shapes.style.StyleFactory;
 import view.ShapeApp;
 

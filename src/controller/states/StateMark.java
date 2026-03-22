@@ -85,26 +85,4 @@ public class StateMark extends State {
 
         return shapesInMerge;
     }
-
-
-
-    /*
-    @Override
-    public void pointerDown(Point point) {
-        app.getShapeContainer().select(point);
-        Shape selected = app.getShapeContainer().getSelected();
-        ShapeContainer shapeContainer = app.getShapeContainer();
-
-        if(selected != null && !selected.isMarked())
-        {
-            Shape markedShape = new ShapeDecorator(selected);
-            markedShape.setMarked(true);
-            shapeContainer.removeShape(selected);
-            shapeContainer.addShape(markedShape);
-            app.getShapeContainer().repaint();
-        }
-    }
-
-     */
-
 }
