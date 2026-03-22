@@ -46,7 +46,6 @@ public class ShapeFactory {
             case "Circle" -> new Circle(p, width, height, style);
             case "Line" -> new Line(p, width, height, style);
             case "Pentagon" -> new Pentagon(p, width, height, style);
-            case "CompositeShape" -> new CompositeShape(p, width, height, new ArrayList<>(), style);
             default -> throw new IllegalArgumentException("Unknown shape: " + shapeType);
         };
     }
