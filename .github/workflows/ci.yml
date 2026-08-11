@@ -2,10 +2,10 @@ name: Java CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ maven ]
 
   pull_request:
-    branches: [ main ]
+    branches: [ maven ]
 
 jobs:
   test:
