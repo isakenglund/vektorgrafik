@@ -82,4 +82,4 @@ Programmet är uppdelat i modell, vy och controller. Verktyg och redigeringsläg
 
 ## GitHub Actions
 
-- **Java CI** kör `mvn --batch-mode verify` för pushar och pull requests mot grenen `maven` och laddar upp den byggda JAR-filen som en artefakt.
+- **Java CI** kör `mvn --batch-mode verify` för pushar och pull requests mot grenarna `master` och `maven` och laddar upp den byggda JAR-filen som en artefakt.
